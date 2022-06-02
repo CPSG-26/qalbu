@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:qalbu/common/colors.dart';
+import 'package:qalbu/common/text_styles.dart';
+import 'package:qalbu/common/utils.dart';
+import 'package:qalbu/presentation/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,56 +17,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+          colorScheme: kColorScheme,
+          primaryColor: kPrimary,
+          textTheme: kTextTheme,
+          scaffoldBackgroundColor: Colors.white
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      navigatorObservers: [routeObserver],
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case MyHomePage.routeName:
+            return MaterialPageRoute(builder: (_) => const MyHomePage(title: 'Flutter Demo Home Page'));
+          default:
+            return MaterialPageRoute(
+              builder: (_) {
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Page not found :('),
+                  ),
+                );
+              },
+            );
+        }
+      },
     );
   }
 }
