@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/utils.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
+import 'package:qalbu/presentation/pages/splash_screen.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 void main() {
@@ -22,10 +23,12 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimary,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const HomePage(),
+      home: const SplashScreen(),
       navigatorObservers: [routeObserver],
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+          case SplashScreen.routeName:
+            return MaterialPageRoute(builder: (_) => const SplashScreen());
           case HomePage.routeName:
             return MaterialPageRoute(builder: (_) => const HomePage());
           case TasbihPage.routeName:
