@@ -27,3 +27,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/logo/
+
+  fonts:
+    - family: At-Tupats
+      fonts:
+        - asset: assets/fonts/at-tupats.otf
