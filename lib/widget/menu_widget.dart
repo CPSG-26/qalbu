@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalbu/model/menu_data.dart';
+import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget({Key? key}) : super(key: key);
@@ -20,7 +21,11 @@ class MenuWidget extends StatelessWidget {
       childAspectRatio: (itemWidth / itemHeight),
       children: menuData.map((menu) {
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            if (menu.id=='2') {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const TasbihPage()));
+            }
+          },
           child: SizedBox(
             child: Column(
               children: <Widget>[

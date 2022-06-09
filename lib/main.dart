@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/utils.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
+import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
         switch (settings.name) {
           case HomePage.routeName:
             return MaterialPageRoute(builder: (_) => const HomePage());
+          case TasbihPage.routeName:
+            return MaterialPageRoute(builder: (_) => const TasbihPage());
           default:
             return MaterialPageRoute(
               builder: (_) {
