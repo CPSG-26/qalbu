@@ -4,7 +4,8 @@ const Color kPrimary = Color(0xFF629C59);
 const Color kSecondary = Color(0xFF86B537);
 const Color kTertiary = Color(0xFF9AC850);
 const Color kTextColor = Color(0xFF1D232E);
-const Color kSecondaryTextColor = Color(0xFF6E775F);
+const Color kSecondaryTextColor = Color(0xFF629C59);
+const Color kTertiaryTextColor = Colors.white;
 
 const kColorScheme = ColorScheme(
     brightness: Brightness.light,
