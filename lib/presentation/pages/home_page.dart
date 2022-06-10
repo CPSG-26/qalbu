@@ -1,49 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:qalbu/widget/custom_sliver_app_bar.dart';
+import 'package:qalbu/widget/doa_widget.dart';
+import 'package:qalbu/widget/menu_widget.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class HomePage extends StatelessWidget {
+  static const routeName = '/home_page';
 
-  static const routeName = '/';
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      body: CustomScrollView(
+        slivers: [
+          const SliverPersistentHeader(
+            delegate: CustomSliverAppBarDelegate(
+              expandedHeight: 204
+            ),
+            pinned: true,
+          ),
+          buildSliver(context)
+        ],
       ),
-      body: Center(
+    );
+  }
+
+  Widget buildSliver(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 56, right: 8, bottom: 8, left: 8),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'mengubah teks',
-            ),
+            const MenuWidget(),
+            const SizedBox(height: 4),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              'Rekomendasi Doa',
+              style: GoogleFonts.poppins(
+                fontSize: 17,
+                fontWeight: FontWeight.w600
+              ),
             ),
+            const SizedBox(height: 2),
+            const DoaWidget()
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
