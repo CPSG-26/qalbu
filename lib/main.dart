@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
+import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/common/utils.dart';
 import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
@@ -40,6 +41,10 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const HomePage());
           case TasbihPage.routeName:
             return MaterialPageRoute(builder: (_) => const TasbihPage());
+          case ListDoaPage.routeName:
+            return MaterialPageRoute(builder: (_) => const ListDoaPage());
+          case DoaPage.routeName:
+            return MaterialPageRoute(builder: (_) => const DoaPage());
           default:
             return MaterialPageRoute(
               builder: (_) {
