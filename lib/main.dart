@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/utils.dart';
+import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
+import 'package:qalbu/presentation/pages/list_doa_page.dart';
 import 'package:qalbu/presentation/pages/splash_screen.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final routes = <String, WidgetBuilder>{
+  ListDoaPage.routeName: (context) => const ListDoaPage(),
+  DoaPage.routeName: (context) => const DoaPage()
+};
 
 class MyApp extends StatelessWidget {
   static const String title = 'Qalbu';
@@ -19,10 +26,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: title,
       theme: ThemeData(
-        colorScheme: kColorScheme,
-        primaryColor: kPrimary,
-        scaffoldBackgroundColor: Colors.white,
-      ),
+          colorScheme: kColorScheme,
+          primaryColor: kPrimary,
+          textTheme: kTextTheme,
+          scaffoldBackgroundColor: Colors.white),
       home: const SplashScreen(),
       navigatorObservers: [routeObserver],
       onGenerateRoute: (RouteSettings settings) {
