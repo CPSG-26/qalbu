@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
-import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/common/utils.dart';
 import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
 import 'package:qalbu/presentation/pages/list_doa_page.dart';
+import 'package:qalbu/presentation/pages/splash_screen.dart';
+import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,26 +17,29 @@ final routes = <String, WidgetBuilder>{
 };
 
 class MyApp extends StatelessWidget {
+  static const String title = 'Qalbu';
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: title,
       theme: ThemeData(
           colorScheme: kColorScheme,
           primaryColor: kPrimary,
           textTheme: kTextTheme,
           scaffoldBackgroundColor: Colors.white),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const SplashScreen(),
       navigatorObservers: [routeObserver],
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
-          case MyHomePage.routeName:
-            return MaterialPageRoute(
-                builder: (_) =>
-                    const MyHomePage(title: 'Flutter Demo Home Page'));
+          case SplashScreen.routeName:
+            return MaterialPageRoute(builder: (_) => const SplashScreen());
+          case HomePage.routeName:
+            return MaterialPageRoute(builder: (_) => const HomePage());
+          case TasbihPage.routeName:
+            return MaterialPageRoute(builder: (_) => const TasbihPage());
           default:
             return MaterialPageRoute(
               builder: (_) {

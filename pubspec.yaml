@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  shared_preferences: ^2.0.15
   cupertino_icons: ^1.0.4
   google_fonts: ^3.0.1
   equatable: ^2.0.3
@@ -22,8 +23,17 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
   flutter_lints: ^2.0.1
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/logo/
+
+  fonts:
+    - family: At-Tupats
+      fonts:
+        - asset: assets/fonts/at-tupats.otf
