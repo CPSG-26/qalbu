@@ -30,7 +30,7 @@ class _TasbihPageState extends State<TasbihPage> {
 
   void _decrementCounter() {
     setState(() {
-      _counter<=0 ? _counter=0 : _counter--;
+      _counter <= 0 ? _counter = 0 : _counter--;
       _saveNumber();
     });
   }
@@ -59,9 +59,7 @@ class _TasbihPageState extends State<TasbihPage> {
       appBar: AppBar(
         title: Text(
           'Tasbih',
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w600
-          ),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
         ),
       ),
       body: Padding(
@@ -93,9 +91,7 @@ class _TasbihPageState extends State<TasbihPage> {
                   Text(
                     '$_counter',
                     style: GoogleFonts.poppins(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w500
-                    ),
+                        fontSize: 42, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(width: 30),
                   SizedBox(
@@ -122,10 +118,7 @@ class _TasbihPageState extends State<TasbihPage> {
               child: Material(
                 elevation: 5,
                 shape: const CircleBorder(
-                  side: BorderSide(
-                    width: 0.5,
-                    color: Colors.black12
-                  ),
+                  side: BorderSide(width: 0.5, color: Colors.black12),
                 ),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: InkWell(
