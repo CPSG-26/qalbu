@@ -8,15 +8,15 @@ const Color kSecondaryTextColor = Color(0xFF629C59);
 const Color kTertiaryTextColor = Colors.white;
 
 const kColorScheme = ColorScheme(
-    brightness: Brightness.light,
-    primary: kPrimary,
-    onPrimary: Colors.white,
-    secondary: kSecondary,
-    onSecondary: Colors.white,
-    error: Colors.red,
-    onError: Colors.white,
-    background: Colors.white,
-    onBackground: kPrimary,
-    surface: Colors.black,
-    onSurface: Colors.white,
+  brightness: Brightness.light,
+  primary: kPrimary,
+  onPrimary: Colors.white,
+  secondary: kSecondary,
+  onSecondary: Colors.white,
+  error: Colors.red,
+  onError: Colors.white,
+  background: Colors.white,
+  onBackground: kPrimary,
+  surface: Colors.black,
+  onSurface: Colors.white,
 );

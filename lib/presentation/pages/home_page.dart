@@ -14,10 +14,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-           const SliverPersistentHeader(
-            delegate: CustomSliverAppBarDelegate(
-              expandedHeight: 204
-            ),
+          const SliverPersistentHeader(
+            delegate: CustomSliverAppBarDelegate(expandedHeight: 204),
             pinned: true,
           ),
           buildSliver(context)
@@ -38,9 +36,7 @@ class HomePage extends StatelessWidget {
             Text(
               'Rekomendasi Doa',
               style: GoogleFonts.poppins(
-                fontSize: 17,
-                fontWeight: FontWeight.w600
-              ),
+                  fontSize: 17, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 2),
             const DoaWidget()

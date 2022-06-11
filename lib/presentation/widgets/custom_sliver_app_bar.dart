@@ -10,12 +10,14 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   });
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     const size = 168;
     final top = expandedHeight - shrinkOffset - size / 2;
 
     return Stack(
-      clipBehavior: Clip.none, fit: StackFit.expand,
+      clipBehavior: Clip.none,
+      fit: StackFit.expand,
       children: [
         buildBackground(shrinkOffset),
         buildAppBar(shrinkOffset),
@@ -119,7 +121,8 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             ),
             const Divider(thickness: 1.5),
             Padding(
-              padding: const EdgeInsets.only(top: 6, right: 12, bottom: 10, left: 8),
+              padding:
+                  const EdgeInsets.only(top: 6, right: 12, bottom: 10, left: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

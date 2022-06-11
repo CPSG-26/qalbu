@@ -20,7 +20,8 @@ class DoaWidget extends StatelessWidget {
             onTap: () {},
             child: Card(
               child: Padding(
-                padding: const EdgeInsets.only(top: 4, right: 8, bottom: 4, left: 8),
+                padding:
+                    const EdgeInsets.only(top: 4, right: 8, bottom: 4, left: 8),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -32,17 +33,12 @@ class DoaWidget extends StatelessWidget {
                           Text(
                             doa.title,
                             style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500
-                            ),
+                                fontSize: 15, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
                     ),
-                    const Expanded(
-                      flex: 1,
-                      child: FavoriteButton()
-                    ),
+                    const Expanded(flex: 1, child: FavoriteButton()),
                   ],
                 ),
               ),
