@@ -6,6 +6,8 @@ const Color kTertiary = Color(0xFF9AC850);
 const Color kTextColor = Color(0xFF1D232E);
 const Color kSecondaryTextColor = Color(0xFF629C59);
 const Color kTertiaryTextColor = Colors.white;
+const Color kTaskTile = Color.fromARGB(255, 236, 236, 236);
+const Color kHint = Colors.grey;
 
 const kColorScheme = ColorScheme(
   brightness: Brightness.light,
@@ -18,5 +20,5 @@ const kColorScheme = ColorScheme(
   background: Colors.white,
   onBackground: kPrimary,
   surface: Colors.black,
-  onSurface: Colors.white,
+  onSurface: kSecondaryTextColor,
 );
