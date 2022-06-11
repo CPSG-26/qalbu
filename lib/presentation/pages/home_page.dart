@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qalbu/widget/custom_sliver_app_bar.dart';
-import 'package:qalbu/widget/doa_widget.dart';
-import 'package:qalbu/widget/menu_widget.dart';
+import 'package:qalbu/presentation/widgets/custom_sliver_app_bar.dart';
+import 'package:qalbu/presentation/widgets/doa_widget.dart';
+import 'package:qalbu/presentation/widgets/menu_widget.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home_page';
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverPersistentHeader(
+           const SliverPersistentHeader(
             delegate: CustomSliverAppBarDelegate(
               expandedHeight: 204
             ),
