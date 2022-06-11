@@ -78,6 +78,7 @@ class _TasbihPageState extends State<TasbihPage> {
                     height: 50,
                     child: FittedBox(
                       child: FloatingActionButton(
+                        heroTag: 'btnDecrement',
                         backgroundColor: Colors.white,
                         onPressed: _decrementCounter,
                         child: const Icon(
@@ -102,6 +103,7 @@ class _TasbihPageState extends State<TasbihPage> {
                     height: 50,
                     child: FittedBox(
                       child: FloatingActionButton(
+                        heroTag: 'btnIncrement',
                         backgroundColor: Colors.white,
                         onPressed: _incrementCounter,
                         child: const Icon(
@@ -139,6 +141,7 @@ class _TasbihPageState extends State<TasbihPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'btnReset',
         backgroundColor: Colors.white,
         onPressed: _resetNumber,
         child: const Icon(

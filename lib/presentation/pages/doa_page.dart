@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DoaPage extends StatefulWidget {
-  static const routeName = 'doa-page';
+  static const routeName = '/doa-page';
 
   const DoaPage({Key? key}) : super(key: key);
 
