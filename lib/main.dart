@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/common/utils.dart';
 import 'package:qalbu/injection.dart' as di;
 import 'package:qalbu/presentation/bloc/quran/quran_bloc.dart';
 import 'package:qalbu/presentation/bloc/quran_detail/quran_detail_bloc.dart';
+import 'package:qalbu/presentation/pages/catatan_ibadah_page.dart';
 import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
 import 'package:qalbu/presentation/pages/list_doa_page.dart';
@@ -21,7 +23,8 @@ void main() {
 
 final routes = <String, WidgetBuilder>{
   ListDoaPage.routeName: (context) => const ListDoaPage(),
-  DoaPage.routeName: (context) => const DoaPage()
+  DoaPage.routeName: (context) => const DoaPage(),
+  CatatanIbadahPage.routeName: (context) => const CatatanIbadahPage(),
 };
 
 class MyApp extends StatelessWidget {
@@ -29,7 +32,6 @@ class MyApp extends StatelessWidget {
 
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -67,6 +69,9 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => const ListDoaPage());
             case DoaPage.routeName:
               return MaterialPageRoute(builder: (_) => const DoaPage());
+            case CatatanIbadahPage.routeName:
+              return MaterialPageRoute(
+                  builder: (_) => const CatatanIbadahPage());
             default:
               return MaterialPageRoute(
                 builder: (_) {
