@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qalbu/common/colors.dart';
+import 'package:qalbu/presentation/widgets/doa_widget.dart';
 
 class DoaPage extends StatefulWidget {
   static const routeName = '/doa-page';
@@ -24,46 +26,61 @@ class _DoaPageState extends State<DoaPage> {
             Text(
               'Doa Keluar Rumah',
               // ignore: unnecessary_const
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: kTertiaryTextColor),
             ),
           ],
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
         ),
       ),
       body: SafeArea(
-        child: Column(children: const <Widget>[
-          Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 40),
-              child: Text(
-                'بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّه',
-                textAlign: TextAlign.right,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+        child: Column(
+          children: <Widget>[
+            const Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: EdgeInsets.only(left: 20, right: 20, top: 40),
+                child: Text(
+                  'بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّه',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(top: 10, left: 25, right: 20),
-              child: Text(
-                'Bismillahi tawakakaltu Alallah, Laa haula wala Quwwata illa Billah',
-                style: TextStyle(fontSize: 20, color: Colors.grey),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(top: 10, left: 25, right: 20),
+                child: Text(
+                  'Bismillahi tawakakaltu Alallah, Laa haula wala Quwwata illa Billah',
+                  style: TextStyle(fontSize: 20, color: Colors.grey),
+                ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(top: 10, left: 25, right: 20),
-              child: Text(
-                'Dengan nama Allah, aku bertawakkal kepada Allah tiada daya dan kekuatan kecuali dengan Allah',
-                style: TextStyle(fontSize: 20),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(top: 10, left: 25, right: 20),
+                child: Text(
+                  'Dengan nama Allah, aku bertawakkal kepada Allah tiada daya dan kekuatan kecuali dengan Allah',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
             ),
-          )
-        ]),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 25, right: 20),
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        const FavoriteButton();
+                      });
+                    },
+                    icon: const FavoriteButton(),
+                  )),
+            ),
+          ],
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last, duplicate_ignore
 
 import 'package:flutter/material.dart';
+import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/presentation/pages/doa_page.dart';
 
 class ListDoaPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _ListDoaPageState extends State<ListDoaPage> {
       appBar: AppBar(
         titleSpacing: 0.0,
         elevation: 5.0,
-        backgroundColor: const Color(0xFF629C59),
+        backgroundColor: kPrimary,
         title: Row(
           // ignore: sort_child_properties_last
           children: <Widget>[
@@ -37,6 +38,7 @@ class _ListDoaPageState extends State<ListDoaPage> {
                     child: Icon(
                       Icons.bookmark,
                       color: Colors.white,
+                      size: 30,
                     ),
                   )
                 ],
@@ -62,8 +64,11 @@ class _ListDoaPageState extends State<ListDoaPage> {
                   ),
                   // ignore: unnecessary_const
                   prefixIcon: const Visibility(
-                    child: Icon(
-                      Icons.search,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Icon(
+                        Icons.search,
+                      ),
                     ),
                   ),
                   hintText: 'Cari Disini',
@@ -75,7 +80,7 @@ class _ListDoaPageState extends State<ListDoaPage> {
               // ignore: sort_child_properties_last
               child: Card(
                 child: InkWell(
-                  splashColor: const Color(0xFF629C59),
+                  splashColor: kPrimary,
                   onTap: () {
                     Navigator.pushNamed(context, DoaPage.routeName);
                   },
@@ -98,7 +103,8 @@ class _ListDoaPageState extends State<ListDoaPage> {
                         ),
                         const Icon(
                           Icons.bookmark_border,
-                          color: Color(0xFF629C59),
+                          color: kSecondary,
+                          size: 32,
                         ),
                       ],
                     ),
@@ -113,7 +119,7 @@ class _ListDoaPageState extends State<ListDoaPage> {
               margin: const EdgeInsets.only(top: 10),
               child: Card(
                 child: InkWell(
-                  splashColor: const Color(0xFF629C59),
+                  splashColor: kPrimary,
                   onTap: () {},
                   child: SizedBox(
                     width: 350,
@@ -134,7 +140,8 @@ class _ListDoaPageState extends State<ListDoaPage> {
                         ),
                         const Icon(
                           Icons.bookmark_outlined,
-                          color: Color(0xFF629C59),
+                          color: kSecondary,
+                          size: 32,
                         ),
                       ],
                     ),
@@ -149,7 +156,7 @@ class _ListDoaPageState extends State<ListDoaPage> {
               margin: const EdgeInsets.only(top: 10),
               child: Card(
                 child: InkWell(
-                  splashColor: const Color(0xFF629C59),
+                  splashColor: kPrimary,
                   onTap: () {},
                   child: SizedBox(
                     width: 350,
@@ -161,17 +168,20 @@ class _ListDoaPageState extends State<ListDoaPage> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: <Widget>[
                         // ignore: prefer_const_constructors
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: const Text(
-                            'Doa Bekal Taqwa Bagi Orang Berpergian',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                        Expanded(
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Doa Bekal Taqwa Bagi Orang Berpergian',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                         const Icon(
                           Icons.bookmark_border,
-                          color: Color(0xFF629C59),
+                          color: kSecondary,
+                          size: 32,
                         ),
                       ],
                     ),
@@ -189,7 +199,7 @@ class _ListDoaPageState extends State<ListDoaPage> {
                     // ignore: unnecessary_const
                     borderRadius: const BorderRadius.all(Radius.circular(2.0))),
                 child: InkWell(
-                  splashColor: const Color(0xFF629C59),
+                  splashColor: kPrimary,
                   onTap: () {},
                   child: SizedBox(
                     width: 350,
@@ -210,7 +220,8 @@ class _ListDoaPageState extends State<ListDoaPage> {
                         ),
                         const Icon(
                           Icons.bookmark_outlined,
-                          color: Color(0xFF629C59),
+                          color: kSecondary,
+                          size: 32,
                         ),
                       ],
                     ),
