@@ -31,7 +31,7 @@ class MenuWidget extends StatelessWidget {
               Navigator.pushNamed(context, TasbihPage.routeName);
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const TasbihPage()));
             } else if (menu.id == '3') {
-              Navigator.pushNamed(context, ListDoaPage.routeName);
+              Navigator.pushNamed(context, DoaPage.routeName);
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const ListDoaPage()));
             } else if (menu.id == '5') {
               Navigator.pushNamed(context, CatatanIbadahPage.routeName);
