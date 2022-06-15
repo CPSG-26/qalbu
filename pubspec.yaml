@@ -23,6 +23,7 @@ dependencies:
   flutter_html: ^3.0.0-alpha.3
   sqflite: ^2.0.2+1
   path: ^1.8.1
+  encrypt: ^5.0.1
 
 dev_dependencies:
   flutter_test:
