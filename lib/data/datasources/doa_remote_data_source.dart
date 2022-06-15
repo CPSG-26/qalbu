@@ -4,12 +4,12 @@ import 'package:qalbu/common/exception.dart';
 import 'package:qalbu/data/models/doa_model.dart';
 import 'package:http/http.dart' as http;
 
-abstract class RemoteDataSource {
+abstract class DoaRemoteDataSource {
   Future<List<DoaModel>> getDoaList();
   Future<DoaModel> getDoaDetail(String id);
 }
 
-class RemoteDataSourceImpl implements RemoteDataSource {
+class RemoteDataSourceImpl implements DoaRemoteDataSource {
   static const baseURL = 'https://doa-doa-api-ahmadramadhan.fly.dev/api';
 
   final http.Client client;

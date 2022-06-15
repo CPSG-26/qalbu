@@ -10,18 +10,18 @@ import 'package:qalbu/domain/entities/doa.dart';
 import 'package:qalbu/domain/repositories/doa_repository.dart';
 
 class DoaRepositoryImpl implements DoaRepository {
-  final RemoteDataSource remoteDataSource;
+  final DoaRemoteDataSource doaRemoteDataSource;
   final DoaLocalDataSource doaLocalDataSource;
 
   DoaRepositoryImpl({
-    required this.remoteDataSource,
+    required this.doaRemoteDataSource,
     required this.doaLocalDataSource,
   });
 
   @override
   Future<Either<Failure, List<Doa>>> getDoaList() async {
     try {
-      final result = await remoteDataSource.getDoaList();
+      final result = await doaRemoteDataSource.getDoaList();
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
@@ -33,7 +33,7 @@ class DoaRepositoryImpl implements DoaRepository {
   @override
   Future<Either<Failure, Doa>> getDoaDetail(String id) async {
     try {
-      final result = await remoteDataSource.getDoaDetail(id);
+      final result = await doaRemoteDataSource.getDoaDetail(id);
       return Right(result.toEntity());
     } on ServerException {
       return Left(ServerFailure(''));
