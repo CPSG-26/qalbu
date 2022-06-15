@@ -37,7 +37,7 @@ class _FavoriteDoaPageState extends State<FavoriteDoaPage> with RouteAware {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Disimpan'),
+        title: const Text('Tersimpan'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

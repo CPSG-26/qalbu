@@ -8,7 +8,7 @@ abstract class FavoriteDoaState extends Equatable {
 }
 
 class FavoriteDoaEmpty extends FavoriteDoaState {
-  final String message = 'You haven\'t saved any doa yet!';
+  final String message = 'Kamu belum menyimpan doa apa pun!';
 }
 
 class FavoriteDoaLoading extends FavoriteDoaState {}

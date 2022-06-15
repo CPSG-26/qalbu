@@ -18,7 +18,7 @@ class DoaLocalDataSourceImpl implements DoaLocalDataSource {
   Future<String> insertFavorite(DoaTable doa) async {
     try {
       await databaseHelper.insertFavorite(doa);
-      return 'Added to Favorite';
+      return 'Ditambahkan ke Tersimpan';
     } catch (e) {
       throw DatabaseException(e.toString());
     }
@@ -28,7 +28,7 @@ class DoaLocalDataSourceImpl implements DoaLocalDataSource {
   Future<String> removeFavorite(DoaTable doa) async {
     try {
       await databaseHelper.removeFavorite(doa);
-      return 'Removed from Favorite';
+      return 'Dihapus dari Tersimpan';
     } catch (e) {
       throw DatabaseException(e.toString());
     }

@@ -10,9 +10,6 @@ part 'favorite_doa_event.dart';
 part 'favorite_doa_state.dart';
 
 class FavoriteDoaBloc extends Bloc<FavoriteDoaEvent, FavoriteDoaState> {
-  static const favoriteAddSuccessMessage = 'Added to Favorite';
-  static const favoriteRemoveSuccessMessage = 'Removed from Favorite';
-
   final GetFavoriteDoa getFavoriteDoa;
   final GetFavoriteStatusDoa getFavoriteStatusDoa;
   final SaveFavoriteDoa saveFavoriteDoa;
