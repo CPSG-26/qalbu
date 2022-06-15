@@ -6,10 +6,23 @@ import 'package:qalbu/presentation/widgets/custom_sliver_app_bar.dart';
 import 'package:qalbu/presentation/widgets/doa_widget.dart';
 import 'package:qalbu/presentation/widgets/menu_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
 
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context.read<DoaListBloc>().add(GetDoaListEvent());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +30,9 @@ class HomePage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverPersistentHeader(
-            delegate: CustomSliverAppBarDelegate(expandedHeight: 204),
+            delegate: CustomSliverAppBarDelegate(
+              expandedHeight: 204
+            ),
             pinned: true,
           ),
           buildSliver(context)
@@ -38,7 +53,9 @@ class HomePage extends StatelessWidget {
             Text(
               'Rekomendasi Doa',
               style: GoogleFonts.poppins(
-                  fontSize: 17, fontWeight: FontWeight.w600),
+                fontSize: 17,
+                fontWeight: FontWeight.w600
+              ),
             ),
             const SizedBox(height: 2),
             SizedBox(
