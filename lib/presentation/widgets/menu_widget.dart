@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qalbu/model/menu_data.dart';
+import 'package:qalbu/data/models/menu_data.dart';
 import 'package:qalbu/presentation/pages/catatan_ibadah_page.dart';
 import 'package:qalbu/presentation/pages/list_doa_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';

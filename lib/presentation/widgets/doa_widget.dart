@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalbu/common/colors.dart';
-import 'package:qalbu/model/doa_data.dart';
+import 'package:qalbu/data/models/doa_data.dart';
 
 class DoaWidget extends StatelessWidget {
   const DoaWidget({Key? key}) : super(key: key);
