@@ -1,87 +1,158 @@
 import 'package:flutter/material.dart';
-import 'package:qalbu/common/colors.dart';
-import 'package:qalbu/presentation/widgets/doa_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:qalbu/domain/entities/doa.dart';
+import 'package:qalbu/presentation/bloc/doa_detail/doa_detail_bloc.dart';
+import 'package:qalbu/presentation/bloc/favorite_doa/favorite_doa_bloc.dart';
 
-class DoaPage extends StatefulWidget {
-  static const routeName = '/doa-page';
+class DoaDetailPage extends StatefulWidget {
+  static const routeName = '/doa-detail-page';
 
-  const DoaPage({Key? key}) : super(key: key);
+  final String id;
+
+  const DoaDetailPage({required this.id});
 
   @override
-  State<DoaPage> createState() => _DoaPageState();
+  State<DoaDetailPage> createState() => _DoaDetailPageState();
 }
 
-class _DoaPageState extends State<DoaPage> {
+class _DoaDetailPageState extends State<DoaDetailPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context.read<DoaDetailBloc>().add(GetDoaDetailEvent(widget.id));
+      context.read<FavoriteDoaBloc>().add(GetStatusDoaEvent(widget.id));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0.0,
-        elevation: 5.0,
-        // ignore: prefer_const_constructors
-        backgroundColor: Color(0xFF629C59),
-        title: Row(
-          // ignore: sort_child_properties_last
-          children: const <Widget>[
-            Text(
-              'Doa Keluar Rumah',
-              // ignore: unnecessary_const
-              style: TextStyle(color: kTertiaryTextColor),
-            ),
-          ],
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        title: const Text('Kumpulan Doa'),
+      ),
+      body: BlocListener<FavoriteDoaBloc, FavoriteDoaState>(
+        listener: (_, state) {
+          if (state is FavoriteDoaSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            context.read<FavoriteDoaBloc>().add(GetStatusDoaEvent(widget.id));
+          }
+        },
+        child: BlocBuilder<DoaDetailBloc, DoaDetailState>(
+          builder: (context, state) {
+            if (state is DoaDetailLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is DoaDetailLoaded) {
+              final doa = state.result;
+              bool isAddedToFavorite = (context.watch<FavoriteDoaBloc>().state is FavoriteDoaStatusLoaded) ? (context.read<FavoriteDoaBloc>().state as FavoriteDoaStatusLoaded).result : false;
+              return SafeArea(
+                child: DetailContent(
+                  doa,
+                  isAddedToFavorite
+                ),
+              );
+            } else {
+              return const Center(
+                child: Text(
+                  'No Data',
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+              );
+            }
+          },
         ),
       ),
-      body: SafeArea(
+    );
+  }
+}
+
+class DetailContent extends StatelessWidget {
+  final Doa doa;
+  final bool isAddedFavorite;
+
+  const DetailContent(this.doa, this.isAddedFavorite);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(18),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20, right: 20, top: 40),
-                child: Text(
-                  'بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّه',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                doa.doa ?? '-',
+                style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, left: 25, right: 20),
-                child: Text(
-                  'Bismillahi tawakakaltu Alallah, Laa haula wala Quwwata illa Billah',
-                  style: TextStyle(fontSize: 20, color: Colors.grey),
-                ),
-              ),
-            ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, left: 25, right: 20),
-                child: Text(
-                  'Dengan nama Allah, aku bertawakkal kepada Allah tiada daya dan kekuatan kecuali dengan Allah',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
+            const SizedBox(height: 20),
             Align(
               alignment: Alignment.centerRight,
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 25, right: 20),
-                  child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        const FavoriteButton();
-                      });
-                    },
-                    icon: const FavoriteButton(),
-                  )),
+              child: Text(
+                doa.ayat ?? '-',
+                style: GoogleFonts.poppins(
+                  fontSize: 32,
+                ),
+                textAlign: TextAlign.end,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  doa.latin ?? '-',
+                  style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      color: Colors.grey
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  doa.artinya ?? '-',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerRight,
+              child: FloatingActionButton(
+                onPressed: () async {
+                  if (!isAddedFavorite) {
+                    BlocProvider.of<FavoriteDoaBloc>(context).add(AddItemDoaEvent(doa));
+                  } else {
+                    BlocProvider.of<FavoriteDoaBloc>(context).add(RemoveItemDoaEvent(doa));
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    isAddedFavorite
+                        ? const Icon(Icons.bookmark)
+                        : const Icon(Icons.bookmark_border),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
