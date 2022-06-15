@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalbu/presentation/bloc/doa_list/doa_list_bloc.dart';
 import 'package:qalbu/presentation/widgets/custom_sliver_app_bar.dart';
 import 'package:qalbu/presentation/widgets/doa_widget.dart';
 import 'package:qalbu/presentation/widgets/menu_widget.dart';
@@ -39,9 +41,61 @@ class HomePage extends StatelessWidget {
                   fontSize: 17, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 2),
-            const DoaWidget()
+            SizedBox(
+              height: 600,
+              child: buildDoaRecommendation(context),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildDoaRecommendation(BuildContext context) {
+    return Scaffold(
+      body: BlocBuilder<DoaListBloc, DoaListState>(
+        builder: (context, state) {
+          if (state is DoaListLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is DoaListLoaded) {
+            return MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  final doa = state.result[index];
+                  return DoaWidget(doa);
+                },
+                itemCount: 10,
+              ),
+            );
+          } else if (state is DoaListEmpty) {
+            return Center(
+              child: Text(
+                state.message,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            );
+          } else if (state is DoaListError) {
+            return Center(
+              key: const Key('error_message'),
+              child: Text(
+                state.message,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }
