@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qalbu/model/menu_data.dart';
+import 'package:qalbu/data/models/menu_data.dart';
 import 'package:qalbu/presentation/pages/catatan_ibadah_page.dart';
-import 'package:qalbu/presentation/pages/list_doa_page.dart';
+import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
@@ -31,7 +31,7 @@ class MenuWidget extends StatelessWidget {
               Navigator.pushNamed(context, TasbihPage.routeName);
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const TasbihPage()));
             } else if (menu.id == '3') {
-              Navigator.pushNamed(context, ListDoaPage.routeName);
+              Navigator.pushNamed(context, DoaPage.routeName);
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const ListDoaPage()));
             } else if (menu.id == '5') {
               Navigator.pushNamed(context, CatatanIbadahPage.routeName);

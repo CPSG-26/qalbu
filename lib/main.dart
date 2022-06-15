@@ -4,12 +4,16 @@ import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/common/utils.dart';
 import 'package:qalbu/injection.dart' as di;
+import 'package:qalbu/presentation/bloc/doa_detail/doa_detail_bloc.dart';
+import 'package:qalbu/presentation/bloc/doa_list/doa_list_bloc.dart';
+import 'package:qalbu/presentation/bloc/favorite_doa/favorite_doa_bloc.dart';
 import 'package:qalbu/presentation/bloc/quran/quran_bloc.dart';
 import 'package:qalbu/presentation/bloc/quran_detail/quran_detail_bloc.dart';
 import 'package:qalbu/presentation/pages/catatan_ibadah_page.dart';
-import 'package:qalbu/presentation/pages/doa_page.dart';
+import 'package:qalbu/presentation/pages/doa_detail_page.dart';
+import 'package:qalbu/presentation/pages/favorite_doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
-import 'package:qalbu/presentation/pages/list_doa_page.dart';
+import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/quran_detail_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';
 import 'package:qalbu/presentation/pages/splash_screen.dart';
@@ -19,12 +23,6 @@ void main() {
   di.init();
   runApp(const MyApp());
 }
-
-final routes = <String, WidgetBuilder>{
-  ListDoaPage.routeName: (context) => const ListDoaPage(),
-  DoaPage.routeName: (context) => const DoaPage(),
-  CatatanIbadahPage.routeName: (context) => const CatatanIbadahPage(),
-};
 
 class MyApp extends StatelessWidget {
   static const String title = 'Qalbu';
@@ -40,6 +38,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<QuranDetailBloc>(),
+        ),
+        BlocProvider(
+            create: (_) => di.locator<DoaListBloc>()
+        ),
+        BlocProvider(
+            create: (_) => di.locator<DoaDetailBloc>()
+        ),
+        BlocProvider(
+            create: (_) => di.locator<FavoriteDoaBloc>()
         ),
       ],
       child: MaterialApp(
@@ -64,10 +71,16 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => QuranDetailPage(id: id));
             case TasbihPage.routeName:
               return MaterialPageRoute(builder: (_) => const TasbihPage());
-            case ListDoaPage.routeName:
-              return MaterialPageRoute(builder: (_) => const ListDoaPage());
             case DoaPage.routeName:
-              return MaterialPageRoute(builder: (_) => const DoaPage());
+              return MaterialPageRoute(builder: (_) => DoaPage());
+            case FavoriteDoaPage.routeName:
+              return MaterialPageRoute(builder: (_) => FavoriteDoaPage());
+            case DoaDetailPage.routeName:
+              final id = settings.arguments as String;
+              return MaterialPageRoute(
+                  builder: (_) => DoaDetailPage(id: id),
+                  settings: settings
+              );
             case CatatanIbadahPage.routeName:
               return MaterialPageRoute(
                   builder: (_) => const CatatanIbadahPage());

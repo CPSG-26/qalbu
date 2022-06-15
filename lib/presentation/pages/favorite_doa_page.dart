@@ -1,53 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qalbu/presentation/bloc/doa_list/doa_list_bloc.dart';
-import 'package:qalbu/presentation/pages/favorite_doa_page.dart';
+import 'package:qalbu/common/utils.dart';
+import 'package:qalbu/presentation/bloc/favorite_doa/favorite_doa_bloc.dart';
 import 'package:qalbu/presentation/widgets/doa_widget.dart';
 
-class DoaPage extends StatefulWidget {
-  static const routeName = '/doa-page';
+class FavoriteDoaPage extends StatefulWidget {
+  static const routeName = '/favorite-doa-page';
 
-  const DoaPage({Key? key}) : super(key: key);
+  const FavoriteDoaPage({Key? key}) : super(key: key);
 
   @override
-  State<DoaPage> createState() => _DoaPageState();
+  _FavoriteDoaPageState createState() => _FavoriteDoaPageState();
 }
 
-class _DoaPageState extends State<DoaPage> {
+class _FavoriteDoaPageState extends State<FavoriteDoaPage> with RouteAware {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<DoaListBloc>().add(GetDoaListEvent());
+      context.read<FavoriteDoaBloc>().add(GetListEvent());
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPopNext() {
+    context.read<FavoriteDoaBloc>().add(GetListEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kumpulan Doa'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const FavoriteDoaPage()));
-            },
-            icon: const Icon(
-              Icons.bookmark,
-              size: 32,
-            ),
-          ),
-        ],
+        title: const Text('Tersimpan'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<DoaListBloc, DoaListState>(
+        child: BlocBuilder<FavoriteDoaBloc, FavoriteDoaState>(
           builder: (context, state) {
-            if (state is DoaListLoading) {
+            if (state is FavoriteDoaLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is DoaListLoaded) {
+            } else if (state is FavoriteDoaLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final doa = state.result[index];
@@ -55,7 +55,7 @@ class _DoaPageState extends State<DoaPage> {
                 },
                 itemCount: state.result.length,
               );
-            } else if (state is DoaListEmpty) {
+            } else if (state is FavoriteDoaEmpty) {
               return Center(
                 child: Text(
                   state.message,
@@ -64,7 +64,7 @@ class _DoaPageState extends State<DoaPage> {
                   ),
                 ),
               );
-            } else if (state is DoaListError) {
+            } else if (state is FavoriteDoaError) {
               return Center(
                 key: const Key('error_message'),
                 child: Text(
@@ -81,5 +81,11 @@ class _DoaPageState extends State<DoaPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 }
