@@ -1,32 +1,48 @@
+// ignore_for_file: sort_child_properties_last, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
-import 'package:qalbu/presentation/widgets/doa_widget.dart';
+import 'package:qalbu/presentation/pages/doa_detail_page.dart';
 
-class DoaPage extends StatefulWidget {
-  static const routeName = '/doa-page';
+class ListDoaPage extends StatefulWidget {
+  static const routeName = 'listDoa-page';
 
-  const DoaPage({Key? key}) : super(key: key);
+  const ListDoaPage({Key? key}) : super(key: key);
 
   @override
-  State<DoaPage> createState() => _DoaPageState();
+  State<ListDoaPage> createState() => _ListDoaPageState();
 }
 
-class _DoaPageState extends State<DoaPage> {
+class _ListDoaPageState extends State<ListDoaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0.0,
         elevation: 5.0,
-        // ignore: prefer_const_constructors
-        backgroundColor: Color(0xFF629C59),
+        backgroundColor: kPrimary,
         title: Row(
           // ignore: sort_child_properties_last
-          children: const <Widget>[
-            Text(
-              'Doa Keluar Rumah',
-              // ignore: unnecessary_const
-              style: TextStyle(color: kTertiaryTextColor),
+          children: <Widget>[
+            const Text(
+              'Kumpulan Doa',
+              style: TextStyle(color: Colors.white),
+            ),
+            // ignore: avoid_unnecessary_containers
+            Container(
+              child: Row(
+                children: const <Widget>[
+                  Padding(
+                    // ignore: unnecessary_const
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Icon(
+                      Icons.bookmark,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,49 +51,186 @@ class _DoaPageState extends State<DoaPage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            const Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20, right: 20, top: 40),
-                child: Text(
-                  'بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّه',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50.0),
+                    ),
+                    // ignore: unnecessary_const
+                    borderSide: BorderSide(color: Color(0xFF629C59)),
+                  ),
+                  // ignore: unnecessary_const
+                  prefixIcon: const Visibility(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Icon(
+                        Icons.search,
+                      ),
+                    ),
+                  ),
+                  hintText: 'Cari Disini',
                 ),
               ),
             ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, left: 25, right: 20),
-                child: Text(
-                  'Bismillahi tawakakaltu Alallah, Laa haula wala Quwwata illa Billah',
-                  style: TextStyle(fontSize: 20, color: Colors.grey),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              // ignore: sort_child_properties_last
+              child: Card(
+                child: InkWell(
+                  splashColor: kPrimary,
+                  onTap: () {
+                    Navigator.pushNamed(context, DoaPage.routeName);
+                  },
+                  child: SizedBox(
+                    width: 350,
+                    height: 60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Doa Keluar Rumah',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.bookmark_border,
+                          color: kSecondary,
+                          size: 32,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
+              decoration: const BoxDecoration(boxShadow: [
+                BoxShadow(color: Colors.white54, blurRadius: 2.0)
+              ]),
             ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, left: 25, right: 20),
-                child: Text(
-                  'Dengan nama Allah, aku bertawakkal kepada Allah tiada daya dan kekuatan kecuali dengan Allah',
-                  style: TextStyle(fontSize: 20),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Card(
+                child: InkWell(
+                  splashColor: kPrimary,
+                  onTap: () {},
+                  child: SizedBox(
+                    width: 350,
+                    height: 60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Doa Masuk Rumah',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.bookmark_outlined,
+                          color: kSecondary,
+                          size: 32,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
+              decoration: const BoxDecoration(boxShadow: [
+                BoxShadow(color: Colors.white54, blurRadius: 2.0)
+              ]),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 25, right: 20),
-                  child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        const FavoriteButton();
-                      });
-                    },
-                    icon: const FavoriteButton(),
-                  )),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Card(
+                child: InkWell(
+                  splashColor: kPrimary,
+                  onTap: () {},
+                  child: SizedBox(
+                    width: 350,
+                    height: 60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: <Widget>[
+                        // ignore: prefer_const_constructors
+                        Expanded(
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Doa Bekal Taqwa Bagi Orang Berpergian',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.bookmark_border,
+                          color: kSecondary,
+                          size: 32,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              decoration: const BoxDecoration(boxShadow: [
+                BoxShadow(color: Colors.white54, blurRadius: 2.0)
+              ]),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Card(
+                shape: const BeveledRectangleBorder(
+                    // ignore: unnecessary_const
+                    borderRadius: const BorderRadius.all(Radius.circular(2.0))),
+                child: InkWell(
+                  splashColor: kPrimary,
+                  onTap: () {},
+                  child: SizedBox(
+                    width: 350,
+                    height: 60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Doa Safar Saat Sudah di Kendaraan',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.bookmark_outlined,
+                          color: kSecondary,
+                          size: 32,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              decoration: const BoxDecoration(boxShadow: [
+                BoxShadow(color: Colors.white54, blurRadius: 2.0)
+              ]),
             ),
           ],
         ),
