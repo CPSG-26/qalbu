@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:qalbu/domain/entities/doa.dart';
 
 List<DoaModel> doaModelFromJson(String str) => List<DoaModel>.from(json.decode(str).map((x) => DoaModel.fromJson(x)));
 
@@ -36,6 +37,16 @@ class DoaModel extends Equatable {
     "latin": latin,
     "artinya": artinya,
   };
+
+  Doa toEntity() {
+    return Doa(
+        id: id,
+        doa: doa,
+        ayat: ayat,
+        latin: latin,
+        artinya: artinya
+    );
+  }
 
   @override
   List<Object?> get props => [

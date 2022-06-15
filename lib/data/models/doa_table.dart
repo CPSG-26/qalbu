@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:qalbu/domain/entities/doa.dart';
 
 class DoaTable extends Equatable {
   final String id;
@@ -9,6 +10,11 @@ class DoaTable extends Equatable {
     required this.doa,
   });
 
+  factory DoaTable.fromEntity(Doa doa) => DoaTable(
+    id: doa.id,
+    doa: doa.doa,
+  );
+
   factory DoaTable.fromMap(Map<String, dynamic> map) => DoaTable(
     id: map['id'],
     doa: map['doa'],
@@ -18,6 +24,11 @@ class DoaTable extends Equatable {
     'id': id,
     'doa': doa,
   };
+
+  Doa toEntity() => Doa.favorite(
+    id: id,
+    doa: doa,
+  );
 
   @override
   List<Object?> get props => [id, doa];
