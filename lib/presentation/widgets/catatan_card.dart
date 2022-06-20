@@ -43,7 +43,7 @@ class _CatatanCardState extends State<CatatanCard> {
         child: CheckboxListTile(
           title: Text(
             widget.judul,
-            maxLines: 2,
+            maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 fontWeight: FontWeight.bold,

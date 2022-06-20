@@ -49,6 +49,7 @@ class ListCatatan extends StatelessWidget {
                     horizontal: 30,
                   ),
                   child: ListView.builder(
+                    shrinkWrap: true,
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return CatatanCard(
