@@ -37,9 +37,13 @@ class TambahCatatan extends StatelessWidget {
 
             /// Textfield catatan baru
             SizedBox(
-              height: 50,
+              height: 80,
               child: TextField(
+                keyboardType: TextInputType.multiline,
+                minLines: 3,
+                maxLines: null,
                 controller: input,
+                maxLength: 50,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(
                     vertical: 2,
