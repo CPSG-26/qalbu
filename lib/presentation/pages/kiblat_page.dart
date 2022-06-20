@@ -7,6 +7,8 @@ import 'package:qalbu/presentation/widgets/kiblat_location_error_widget.dart';
 import 'package:qalbu/presentation/widgets/kiblat_widget.dart';
 
 class KiblatPage extends StatefulWidget {
+  static const routeName = '/kiblat-page';
+
   const KiblatPage({Key? key}) : super(key: key);
 
   @override

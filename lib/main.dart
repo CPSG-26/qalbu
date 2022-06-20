@@ -16,6 +16,7 @@ import 'package:qalbu/presentation/pages/doa_detail_page.dart';
 import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/favorite_doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
+import 'package:qalbu/presentation/pages/kiblat_page.dart';
 import 'package:qalbu/presentation/pages/prayer_time_page.dart';
 import 'package:qalbu/presentation/pages/quran_detail_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';
@@ -82,10 +83,12 @@ class MyApp extends StatelessWidget {
               final id = settings.arguments as String;
               return MaterialPageRoute(
                   builder: (_) => DoaDetailPage(id: id), settings: settings);
+            case KiblatPage.routeName:
+              return MaterialPageRoute(
+                  builder: (_) => const KiblatPage());
             case CatatanIbadahPage.routeName:
               return MaterialPageRoute(
                   builder: (_) => const CatatanIbadahPage());
-
             case PrayerTimePage.routeName:
               return MaterialPageRoute(builder: (_) {
                 PrayerTimePage argument = settings.arguments as PrayerTimePage;
