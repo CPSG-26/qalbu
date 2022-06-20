@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qalbu/data/models/menu_data.dart';
 import 'package:qalbu/presentation/pages/catatan_ibadah_page.dart';
 import 'package:qalbu/presentation/pages/doa_page.dart';
+import 'package:qalbu/presentation/pages/kiblat_page.dart';
 import 'package:qalbu/presentation/pages/prayer_time_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
@@ -31,7 +32,7 @@ class MenuWidget extends StatelessWidget {
       primary: false,
       shrinkWrap: true,
       crossAxisCount: 4,
-      crossAxisSpacing: 12,
+      crossAxisSpacing: 24,
       childAspectRatio: (itemWidth / itemHeight),
       children: menuData.map((menu) {
         return InkWell(
@@ -56,6 +57,8 @@ class MenuWidget extends StatelessWidget {
                     currentAddress: currentAdress),
               );
             } else if (menu.id == '5') {
+              Navigator.pushNamed(context, KiblatPage.routeName);
+            } else if (menu.id == '6') {
               Navigator.pushNamed(context, CatatanIbadahPage.routeName);
             }
           },
@@ -74,7 +77,7 @@ class MenuWidget extends StatelessWidget {
                     child: Text(
                       menu.title,
                       style: GoogleFonts.poppins(
-                        fontSize: 12,
+                        fontSize: 10,
                         fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,

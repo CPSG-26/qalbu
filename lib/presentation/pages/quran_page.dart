@@ -28,23 +28,16 @@ class _QuranPageState extends State<QuranPage> {
         appBar: AppBar(
           title: const Text('Al-Quran'),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              BlocBuilder<QuranBloc, QuranState>(builder: (context, state) {
-                if (state is QuranLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is QuranHasData) {
-                  return QuranList(quranList: state.quranList);
-                } else {
-                  return const Text('Failed');
-                }
-              })
-            ],
-          ),
+        body: BlocBuilder<QuranBloc, QuranState>(
+          builder: (context, state) {
+            if (state is QuranLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is QuranHasData) {
+              return QuranList(quranList: state.quranList);
+            } else {
+              return const Text('Failed');
+            }
+          }
         ),
       ),
     );

@@ -13,10 +13,8 @@ class QuranList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       child: ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
         itemCount: quranList.length,
         itemBuilder: (context, index) {
           final surat = quranList[index];
