@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalbu/common/colors.dart';
+import 'package:slide_countdown/slide_countdown.dart';
 
 class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
+  final String nextPrayerTime;
+  final String currentDate;
+  final String currentAddress;
+  final int hours;
+  final int minutes;
+  final int seconds;
 
   const CustomSliverAppBarDelegate({
     required this.expandedHeight,
+    required this.nextPrayerTime,
+    required this.currentDate,
+    required this.currentAddress,
+    required this.hours,
+    required this.minutes,
+    required this.seconds,
   });
 
   @override
@@ -134,7 +147,8 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                         size: 20,
                       ),
                       Text(
-                        "Kabupaten Garut",
+                        currentAddress,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -143,7 +157,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                     ],
                   ),
                   Text(
-                    "Sabtu, 28 Mei 2022",
+                    currentDate,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -159,19 +173,11 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                 children: [
                   Row(
                     children: <Widget>[
-                      Text(
-                        "Dzuhur",
-                        style: GoogleFonts.poppins(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: kSecondary,
-                        ),
-                      ),
                       const SizedBox(width: 4),
                       Text(
-                        "11:49 WIB",
+                        nextPrayerTime,
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: kSecondary,
                         ),
@@ -180,22 +186,13 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                   ),
                   Row(
                     children: <Widget>[
-                      Text(
-                        "02:10:19",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: kSecondary,
+                      SlideCountdown(
+                        duration: Duration(
+                          hours: hours,
+                          minutes: minutes,
+                          seconds: seconds,
                         ),
-                      ),
-                      const SizedBox(width: 2),
-                      Text(
-                        "Menjelang Azan",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: kSecondary,
-                        ),
+                        slideDirection: SlideDirection.up,
                       ),
                     ],
                   ),

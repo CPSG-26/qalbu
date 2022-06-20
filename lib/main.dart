@@ -7,13 +7,16 @@ import 'package:qalbu/injection.dart' as di;
 import 'package:qalbu/presentation/bloc/doa_detail/doa_detail_bloc.dart';
 import 'package:qalbu/presentation/bloc/doa_list/doa_list_bloc.dart';
 import 'package:qalbu/presentation/bloc/favorite_doa/favorite_doa_bloc.dart';
+import 'package:qalbu/presentation/bloc/prayer_time_daily/prayer_time_daily_bloc.dart';
+import 'package:qalbu/presentation/bloc/prayer_time_monthly/prayer_time_monthly_bloc.dart';
 import 'package:qalbu/presentation/bloc/quran/quran_bloc.dart';
 import 'package:qalbu/presentation/bloc/quran_detail/quran_detail_bloc.dart';
 import 'package:qalbu/presentation/pages/catatan_ibadah_page.dart';
 import 'package:qalbu/presentation/pages/doa_detail_page.dart';
+import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/favorite_doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
-import 'package:qalbu/presentation/pages/doa_page.dart';
+import 'package:qalbu/presentation/pages/prayer_time_page.dart';
 import 'package:qalbu/presentation/pages/quran_detail_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';
 import 'package:qalbu/presentation/pages/splash_screen.dart';
@@ -39,14 +42,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<QuranDetailBloc>(),
         ),
+        BlocProvider(create: (_) => di.locator<DoaListBloc>()),
+        BlocProvider(create: (_) => di.locator<DoaDetailBloc>()),
+        BlocProvider(create: (_) => di.locator<FavoriteDoaBloc>()),
         BlocProvider(
-            create: (_) => di.locator<DoaListBloc>()
+          create: (_) => di.locator<PrayerTimeMonthlyBloc>(),
         ),
         BlocProvider(
-            create: (_) => di.locator<DoaDetailBloc>()
-        ),
-        BlocProvider(
-            create: (_) => di.locator<FavoriteDoaBloc>()
+          create: (_) => di.locator<PrayerTimeDailyBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -78,12 +81,22 @@ class MyApp extends StatelessWidget {
             case DoaDetailPage.routeName:
               final id = settings.arguments as String;
               return MaterialPageRoute(
-                  builder: (_) => DoaDetailPage(id: id),
-                  settings: settings
-              );
+                  builder: (_) => DoaDetailPage(id: id), settings: settings);
             case CatatanIbadahPage.routeName:
               return MaterialPageRoute(
                   builder: (_) => const CatatanIbadahPage());
+
+            case PrayerTimePage.routeName:
+              return MaterialPageRoute(builder: (_) {
+                PrayerTimePage argument = settings.arguments as PrayerTimePage;
+                return PrayerTimePage(
+                  lat: argument.lat,
+                  long: argument.long,
+                  month: argument.month,
+                  year: argument.year,
+                  currentAddress: argument.currentAddress,
+                );
+              });
             default:
               return MaterialPageRoute(
                 builder: (_) {
