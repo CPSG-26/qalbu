@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalbu/common/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
 
@@ -185,6 +186,7 @@ class _TasbihPageState extends State<TasbihPage> {
                   leading: Radio<TasbihNumber>(
                     value: TasbihNumber.number33,
                     groupValue: _number,
+                    fillColor: MaterialStateColor.resolveWith((states) => kPrimary),
                     onChanged: (TasbihNumber? value) {
                       setState(() {
                         _number = value;
@@ -204,6 +206,7 @@ class _TasbihPageState extends State<TasbihPage> {
                   leading: Radio<TasbihNumber>(
                     value: TasbihNumber.number99,
                     groupValue: _number,
+                    fillColor: MaterialStateColor.resolveWith((states) => kPrimary),
                     onChanged: (TasbihNumber? value) {
                       setState(() {
                         _number = value;
