@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,13 +24,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _auth = FirebaseAuth.instance;
+  late User _activeUser;
+
   var currentTime = DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now());
   var date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   var nextDay = DateFormat('dd-MM-yyyy')
       .format(DateTime.now().add(const Duration(days: 1)));
 
   late Datum data;
-  Position? _currentPosition;
+  late Position? _currentPosition;
   String? _currentAddress;
   String? prayerHours;
   String? prayerMinutes;
@@ -44,12 +48,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {});
-    _getCurrentLocation().whenComplete(() => Future.microtask(() {
-          context.read<PrayerTimeDailyBloc>().add(FetchPrayerTimeDaily(
-              date, _currentPosition!.latitude, _currentPosition!.longitude));
-          context.read<DoaListBloc>().add(GetDoaListEvent());
-        }));
+    _getCurrentLocation().whenComplete(
+      () => Future.microtask(() {
+        context.read<PrayerTimeDailyBloc>().add(FetchPrayerTimeDaily(
+            date, _currentPosition!.latitude, _currentPosition!.longitude));
+        context.read<DoaListBloc>().add(GetDoaListEvent());
+      }),
+    );
+    _getCurrentUser();
   }
 
   @override
@@ -76,6 +82,7 @@ class _HomePageState extends State<HomePage> {
               slivers: [
                 SliverPersistentHeader(
                   delegate: CustomSliverAppBarDelegate(
+                    userName: _activeUser.displayName,
                     expandedHeight: 204,
                     nextPrayerTime: prayerNext ?? '-',
                     currentDate: data.date.readable,
@@ -294,6 +301,20 @@ class _HomePageState extends State<HomePage> {
     if (kDebugMode) {
       print(
           "$days day(s) $hours hour(s) $minutes minute(s) $seconds second(s).");
+    }
+  }
+
+  void _getCurrentUser() {
+    try {
+      var currentUser = _auth.currentUser;
+
+      if (currentUser != null) {
+        _activeUser = currentUser;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }
