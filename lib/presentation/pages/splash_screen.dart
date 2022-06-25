@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
-import 'package:qalbu/presentation/pages/home_page.dart';
+import 'package:qalbu/presentation/pages/login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash_screen';
@@ -18,8 +18,7 @@ class SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+      Navigator.pushReplacementNamed(context, LoginPage.routeName);
     });
   }
 
