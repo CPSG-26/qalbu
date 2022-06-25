@@ -56,21 +56,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => di.locator<QuranBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => di.locator<QuranDetailBloc>(),
-        ),
+        BlocProvider(create: (_) => di.locator<QuranBloc>()),
+        BlocProvider(create: (_) => di.locator<QuranDetailBloc>()),
         BlocProvider(create: (_) => di.locator<DoaListBloc>()),
         BlocProvider(create: (_) => di.locator<DoaDetailBloc>()),
         BlocProvider(create: (_) => di.locator<FavoriteDoaBloc>()),
-        BlocProvider(
-          create: (_) => di.locator<PrayerTimeMonthlyBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => di.locator<PrayerTimeDailyBloc>(),
-        ),
+        BlocProvider(create: (_) => di.locator<PrayerTimeMonthlyBloc>()),
+        BlocProvider(create: (_) => di.locator<PrayerTimeDailyBloc>()),
       ],
       child: MaterialApp(
         title: title,

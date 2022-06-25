@@ -248,32 +248,32 @@ class _HomePageState extends State<HomePage> {
       var upcomingPrayerTime = data.timings.fajr.split(':');
       prayerHours = upcomingPrayerTime[0];
       prayerMinutes = upcomingPrayerTime[1];
-      prayerNext = 'Shubuh ${data.timings.fajr} WIB';
+      prayerNext = 'Shubuh ${data.timings.fajr}';
     } else if (now.isBefore(dzuhur) && now.isAfter(shubuh)) {
       var upcomingPrayerTime = data.timings.dhuhr.split(':');
       prayerHours = upcomingPrayerTime[0];
       prayerMinutes = upcomingPrayerTime[1];
-      prayerNext = 'Dzuhur ${data.timings.dhuhr} WIB';
+      prayerNext = 'Dzuhur ${data.timings.dhuhr}';
     } else if (now.isBefore(ashar) && now.isAfter(dzuhur)) {
       var upcomingPrayerTime = data.timings.asr.split(':');
       prayerHours = upcomingPrayerTime[0];
       prayerMinutes = upcomingPrayerTime[1];
-      prayerNext = 'Ashar ${data.timings.asr} WIB';
+      prayerNext = 'Ashar ${data.timings.asr}';
     } else if (now.isBefore(maghrib) && now.isAfter(ashar)) {
       var upcomingPrayerTime = data.timings.maghrib.split(':');
       prayerHours = upcomingPrayerTime[0];
       prayerMinutes = upcomingPrayerTime[1];
-      prayerNext = 'Maghrib ${data.timings.maghrib} WIB';
+      prayerNext = 'Maghrib ${data.timings.maghrib}';
     } else if (now.isBefore(isya) && now.isAfter(maghrib)) {
       var upcomingPrayerTime = data.timings.isha.split(':');
       prayerHours = upcomingPrayerTime[0];
       prayerMinutes = upcomingPrayerTime[1];
-      prayerNext = 'Isya ${data.timings.isha} WIB';
+      prayerNext = 'Isya ${data.timings.isha}';
     } else {
       var upcomingPrayerTime = data.timings.fajr.split(':');
       prayerHours = upcomingPrayerTime[0];
       prayerMinutes = upcomingPrayerTime[1];
-      prayerNext = 'Shubuh ${data.timings.fajr} WIB';
+      prayerNext = 'Shubuh ${data.timings.fajr}';
     }
 
     DateTime a = DateTime(
