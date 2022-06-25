@@ -79,7 +79,7 @@ class MenuWidget extends StatelessWidget {
                     child: Text(
                       menu.title,
                       style: GoogleFonts.poppins(
-                        fontSize: 10,
+                        fontSize: 11,
                         fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,

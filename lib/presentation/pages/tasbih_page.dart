@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalbu/common/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vibration/vibration.dart';
+
+enum TasbihNumber { number33, number99 }
 
 class TasbihPage extends StatefulWidget {
   static const routeName = '/tasbih_page';
@@ -13,6 +18,7 @@ class TasbihPage extends StatefulWidget {
 
 class _TasbihPageState extends State<TasbihPage> {
   int _counter = 0;
+  TasbihNumber? _number = TasbihNumber.number33;
   static const String counterNumberPrefs = 'counterNumber';
 
   @override
@@ -22,15 +28,48 @@ class _TasbihPageState extends State<TasbihPage> {
   }
 
   void _incrementCounter() {
-    setState(() {
-      _counter++;
-      _saveNumber();
-    });
+    if(_number == TasbihNumber.number33) {
+      if(_counter == 32) {
+        Vibration.vibrate(duration: 800);
+        setState(() {
+          _counter++;
+          _saveNumber();
+        });
+      }else if(_counter == 33) {
+        HapticFeedback.lightImpact();
+        _resetNumber();
+      }else {
+        setState(() {
+          HapticFeedback.lightImpact();
+          _counter++;
+          _saveNumber();
+        });
+      }
+    }
+    if(_number == TasbihNumber.number99) {
+      if(_counter == 98) {
+        Vibration.vibrate(duration: 800);
+        setState(() {
+          _counter++;
+          _saveNumber();
+        });
+      }else if(_counter == 99) {
+        HapticFeedback.lightImpact();
+        _resetNumber();
+      }else {
+        setState(() {
+          HapticFeedback.lightImpact();
+          _counter++;
+          _saveNumber();
+        });
+      }
+    }
   }
 
   void _decrementCounter() {
     setState(() {
-      _counter <= 0 ? _counter = 0 : _counter--;
+      HapticFeedback.lightImpact();
+      _counter<=0 ? _counter=0 : _counter--;
       _saveNumber();
     });
   }
@@ -48,6 +87,7 @@ class _TasbihPageState extends State<TasbihPage> {
   }
 
   void _resetNumber() async {
+    HapticFeedback.lightImpact();
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(counterNumberPrefs);
     _loadNumber();
@@ -63,7 +103,7 @@ class _TasbihPageState extends State<TasbihPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 24, bottom: 36),
+        padding: const EdgeInsets.only(top: 24),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -91,7 +131,8 @@ class _TasbihPageState extends State<TasbihPage> {
                   Text(
                     '$_counter',
                     style: GoogleFonts.poppins(
-                        fontSize: 42, fontWeight: FontWeight.w500),
+                      fontSize: 42,
+                      fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(width: 30),
                   SizedBox(
@@ -114,11 +155,13 @@ class _TasbihPageState extends State<TasbihPage> {
               ),
             ),
             Expanded(
-              flex: 10,
+              flex: 6,
               child: Material(
                 elevation: 5,
                 shape: const CircleBorder(
-                  side: BorderSide(width: 0.5, color: Colors.black12),
+                  side: BorderSide(
+                    width: 0.5,
+                    color: Colors.black12),
                 ),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: InkWell(
@@ -129,6 +172,50 @@ class _TasbihPageState extends State<TasbihPage> {
                   ),
                 ),
               ),
+            ),
+            Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    '33',
+                    style: GoogleFonts.poppins(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                  leading: Radio<TasbihNumber>(
+                    value: TasbihNumber.number33,
+                    groupValue: _number,
+                    fillColor: MaterialStateColor.resolveWith((states) => kPrimary),
+                    onChanged: (TasbihNumber? value) {
+                      setState(() {
+                        _number = value;
+                        _resetNumber();
+                      });
+                    },
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    '99',
+                    style: GoogleFonts.poppins(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                  leading: Radio<TasbihNumber>(
+                    value: TasbihNumber.number99,
+                    groupValue: _number,
+                    fillColor: MaterialStateColor.resolveWith((states) => kPrimary),
+                    onChanged: (TasbihNumber? value) {
+                      setState(() {
+                        _number = value;
+                        _resetNumber();
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),
