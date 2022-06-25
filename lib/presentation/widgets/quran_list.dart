@@ -22,7 +22,7 @@ class QuranList extends StatelessWidget {
             elevation: 4,
             child: ListTile(
               leading: NumberBorder(numberAyat: surat.nomor),
-              title: Text(surat.namaLatin, style: atTupatsStyle),
+              title: Text(surat.namaLatin, style: kHeading6),
               subtitle: Text(
                   '${surat.tempatTurun.toUpperCase()} - ${surat.jumlahAyat} AYAT'),
               trailing: Text(

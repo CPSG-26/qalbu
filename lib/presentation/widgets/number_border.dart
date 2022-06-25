@@ -12,7 +12,7 @@ class NumberBorder extends StatelessWidget {
       alignment: Alignment.center,
       children: <Widget>[
         Image.asset('assets/icons/no_ayat.png'),
-        Text(numberAyat.toString(), style: ramadhaniStyle),
+        Text(numberAyat.toString(), style: kBodyText),
       ],
     );
   }
