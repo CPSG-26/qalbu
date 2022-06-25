@@ -147,7 +147,9 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                         size: 20,
                       ),
                       Text(
-                        currentAddress,
+                        currentAddress.length > 18
+                            ? '${currentAddress.substring(0, 19)}...'
+                            : currentAddress,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontSize: 16,

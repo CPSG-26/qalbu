@@ -5,11 +5,13 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:qalbu/domain/entities/datum.dart';
 import 'package:qalbu/presentation/bloc/doa_list/doa_list_bloc.dart';
-import 'package:qalbu/presentation/bloc/prayer_time_daily/prayer_time_daily_bloc.dart';
 import 'package:qalbu/presentation/widgets/custom_sliver_app_bar.dart';
 import 'package:qalbu/presentation/widgets/doa_widget.dart';
 import 'package:qalbu/presentation/widgets/menu_widget.dart';
+
+import '../bloc/prayer_time_daily/prayer_time_daily_bloc.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -21,17 +23,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var currentTime = DateFormat('dd-MM-yyyy H:m').format(DateTime.now());
+  var currentTime = DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now());
   var date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   var nextDay = DateFormat('dd-MM-yyyy')
       .format(DateTime.now().add(const Duration(days: 1)));
 
+  late Datum data;
   Position? _currentPosition;
   String? _currentAddress;
   String? prayerHours;
   String? prayerMinutes;
   String? prayerNext;
 
+  late Duration difference;
   int? days;
   int? hours;
   int? minutes;
@@ -40,12 +44,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      context.read<DoaListBloc>().add(GetDoaListEvent());
-    });
+    Future.microtask(() {});
     _getCurrentLocation().whenComplete(() => Future.microtask(() {
           context.read<PrayerTimeDailyBloc>().add(FetchPrayerTimeDaily(
               date, _currentPosition!.latitude, _currentPosition!.longitude));
+          context.read<DoaListBloc>().add(GetDoaListEvent());
         }));
   }
 
@@ -66,56 +69,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         } else if (state is PrayerTimeDailyHasData) {
-          final prayerTime = state.prayerTime.data;
-          var apiDateShubuh =
-              '${date.toString().substring(0, 10)} ${prayerTime.timings.imsak}';
-          var apiDateDzuhur =
-              '${date.toString().substring(0, 10)} ${prayerTime.timings.dhuhr}';
-          var apiDateAshar =
-              '${date.toString().substring(0, 10)} ${prayerTime.timings.asr}';
-          var apiDateMaghrib =
-              '${date.toString().substring(0, 10)} ${prayerTime.timings.maghrib}';
-          var apiDateIsya =
-              '${date.toString().substring(0, 10)} ${prayerTime.timings.isha}';
-
-          var shubuh = DateFormat("dd-MM-yyyy hh:mm").parse(apiDateShubuh);
-          var dzuhur = DateFormat("dd-MM-yyyy hh:mm").parse(apiDateDzuhur);
-          var ashar = DateFormat("dd-MM-yyyy hh:mm").parse(apiDateAshar);
-          var maghrib = DateFormat("dd-MM-yyyy hh:mm").parse(apiDateMaghrib);
-          var isya = DateFormat("dd-MM-yyyy hh:mm").parse(apiDateIsya);
-          var time = DateFormat("dd-MM-yyyy hh:mm").parse(currentTime);
-
-          if (time.compareTo(shubuh) <= 0) {
-            var upcomingPrayerTime = prayerTime.timings.fajr.split(':');
-            prayerHours = upcomingPrayerTime[0];
-            prayerMinutes = upcomingPrayerTime[1];
-            prayerNext = 'Shubuh ${prayerTime.timings.fajr} WIB';
-          } else if (time.compareTo(dzuhur) <= 0) {
-            var upcomingPrayerTime = prayerTime.timings.dhuhr.split(':');
-            prayerHours = upcomingPrayerTime[0];
-            prayerMinutes = upcomingPrayerTime[1];
-            prayerNext = 'Dzuhur ${prayerTime.timings.dhuhr} WIB';
-          } else if (time.compareTo(ashar) <= 0) {
-            var upcomingPrayerTime = prayerTime.timings.asr.split(':');
-            prayerHours = upcomingPrayerTime[0];
-            prayerMinutes = upcomingPrayerTime[1];
-            prayerNext = 'Ashar ${prayerTime.timings.asr} WIB';
-          } else if (time.compareTo(maghrib) <= 0) {
-            var upcomingPrayerTime = prayerTime.timings.maghrib.split(':');
-            prayerHours = upcomingPrayerTime[0];
-            prayerMinutes = upcomingPrayerTime[1];
-            prayerNext = 'Maghrib ${prayerTime.timings.maghrib} WIB';
-          } else if (time.compareTo(isya) <= 0) {
-            var upcomingPrayerTime = prayerTime.timings.isha.split(':');
-            prayerHours = upcomingPrayerTime[0];
-            prayerMinutes = upcomingPrayerTime[1];
-            prayerNext = 'Isya ${prayerTime.timings.isha} WIB';
-          } else {
-            var upcomingPrayerTime = prayerTime.timings.fajr.split(':');
-            prayerHours = upcomingPrayerTime[0];
-            prayerMinutes = upcomingPrayerTime[1];
-            prayerNext = 'Shubuh ${prayerTime.timings.fajr} WIB';
-          }
+          data = state.prayerTime.data;
           _getCountDown();
           return Scaffold(
             body: CustomScrollView(
@@ -124,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                   delegate: CustomSliverAppBarDelegate(
                     expandedHeight: 204,
                     nextPrayerTime: prayerNext ?? '-',
-                    currentDate: prayerTime.date.readable,
+                    currentDate: data.date.readable,
                     currentAddress: _currentAddress ?? '-',
                     hours: hours!,
                     minutes: minutes!,
@@ -185,7 +139,7 @@ class _HomePageState extends State<HomePage> {
               context: context,
               removeTop: true,
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   final doa = state.result[index];
@@ -225,12 +179,8 @@ class _HomePageState extends State<HomePage> {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
       Geolocator.getServiceStatusStream();
       await Geolocator.getCurrentPosition();
     }
@@ -239,23 +189,14 @@ class _HomePageState extends State<HomePage> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
         return Future.error('Location permissions are denied');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
 
@@ -285,16 +226,65 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getCountDown() {
-    DateTime a = DateTime(
-      DateTime.now().year,
-      DateTime.now().month,
-      DateTime.now().day,
-      int.parse(prayerHours!),
-      int.parse(prayerMinutes!),
-    );
-    DateTime b = DateTime.now();
+    var apiDateShubuh =
+        '${date.toString().substring(0, 10)} ${data.timings.imsak}';
+    var apiDateDzuhur =
+        '${date.toString().substring(0, 10)} ${data.timings.dhuhr}';
+    var apiDateAshar =
+        '${date.toString().substring(0, 10)} ${data.timings.asr}';
+    var apiDateMaghrib =
+        '${date.toString().substring(0, 10)} ${data.timings.maghrib}';
+    var apiDateIsya =
+        '${date.toString().substring(0, 10)} ${data.timings.isha}';
 
-    Duration difference = a.difference(b);
+    DateTime now = DateFormat("dd-MM-yyyy HH:mm").parse(currentTime);
+    DateTime shubuh = DateFormat("dd-MM-yyyy HH:mm").parse(apiDateShubuh);
+    DateTime dzuhur = DateFormat("dd-MM-yyyy HH:mm").parse(apiDateDzuhur);
+    DateTime ashar = DateFormat("dd-MM-yyyy HH:mm").parse(apiDateAshar);
+    DateTime maghrib = DateFormat("dd-MM-yyyy HH:mm").parse(apiDateMaghrib);
+    DateTime isya = DateFormat("dd-MM-yyyy HH:mm").parse(apiDateIsya);
+
+    if (now.isBefore(shubuh)) {
+      var upcomingPrayerTime = data.timings.fajr.split(':');
+      prayerHours = upcomingPrayerTime[0];
+      prayerMinutes = upcomingPrayerTime[1];
+      prayerNext = 'Shubuh ${data.timings.fajr}';
+    } else if (now.isBefore(dzuhur) && now.isAfter(shubuh)) {
+      var upcomingPrayerTime = data.timings.dhuhr.split(':');
+      prayerHours = upcomingPrayerTime[0];
+      prayerMinutes = upcomingPrayerTime[1];
+      prayerNext = 'Dzuhur ${data.timings.dhuhr}';
+    } else if (now.isBefore(ashar) && now.isAfter(dzuhur)) {
+      var upcomingPrayerTime = data.timings.asr.split(':');
+      prayerHours = upcomingPrayerTime[0];
+      prayerMinutes = upcomingPrayerTime[1];
+      prayerNext = 'Ashar ${data.timings.asr}';
+    } else if (now.isBefore(maghrib) && now.isAfter(ashar)) {
+      var upcomingPrayerTime = data.timings.maghrib.split(':');
+      prayerHours = upcomingPrayerTime[0];
+      prayerMinutes = upcomingPrayerTime[1];
+      prayerNext = 'Maghrib ${data.timings.maghrib}';
+    } else if (now.isBefore(isya) && now.isAfter(maghrib)) {
+      var upcomingPrayerTime = data.timings.isha.split(':');
+      prayerHours = upcomingPrayerTime[0];
+      prayerMinutes = upcomingPrayerTime[1];
+      prayerNext = 'Isya ${data.timings.isha}';
+    } else {
+      var upcomingPrayerTime = data.timings.fajr.split(':');
+      prayerHours = upcomingPrayerTime[0];
+      prayerMinutes = upcomingPrayerTime[1];
+      prayerNext = 'Shubuh ${data.timings.fajr}';
+    }
+
+    DateTime a = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      int.parse(prayerHours ?? '0'),
+      int.parse(prayerMinutes ?? '0'),
+    );
+
+    difference = a.difference(now);
 
     days = difference.inDays;
     hours = difference.inHours % 24;

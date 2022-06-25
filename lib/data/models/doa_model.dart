@@ -8,7 +8,7 @@ List<DoaModel> doaModelFromJson(String str) => List<DoaModel>.from(json.decode(s
 String doaModelToJson(List<DoaModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DoaModel extends Equatable {
-  DoaModel({
+  const DoaModel({
     required this.id,
     required this.doa,
     required this.ayat,

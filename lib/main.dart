@@ -1,5 +1,7 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/common/utils.dart';
@@ -23,7 +25,24 @@ import 'package:qalbu/presentation/pages/quran_page.dart';
 import 'package:qalbu/presentation/pages/splash_screen.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  AwesomeNotifications().initialize(
+    'resource://drawable/res_app_icon',
+    [
+      NotificationChannel(
+        channelKey: 'scheduled_channel',
+        channelName: 'Scheduled Notifications',
+        defaultColor: kPrimary,
+        channelDescription: 'Scheduled Notifications',
+        channelShowBadge: true,
+        importance: NotificationImportance.High,
+      )
+    ],
+  );
+  await GetStorage.init();
+
   di.init();
   runApp(const MyApp());
 }
@@ -37,21 +56,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => di.locator<QuranBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => di.locator<QuranDetailBloc>(),
-        ),
+        BlocProvider(create: (_) => di.locator<QuranBloc>()),
+        BlocProvider(create: (_) => di.locator<QuranDetailBloc>()),
         BlocProvider(create: (_) => di.locator<DoaListBloc>()),
         BlocProvider(create: (_) => di.locator<DoaDetailBloc>()),
         BlocProvider(create: (_) => di.locator<FavoriteDoaBloc>()),
-        BlocProvider(
-          create: (_) => di.locator<PrayerTimeMonthlyBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => di.locator<PrayerTimeDailyBloc>(),
-        ),
+        BlocProvider(create: (_) => di.locator<PrayerTimeMonthlyBloc>()),
+        BlocProvider(create: (_) => di.locator<PrayerTimeDailyBloc>()),
       ],
       child: MaterialApp(
         title: title,
@@ -76,16 +87,15 @@ class MyApp extends StatelessWidget {
             case TasbihPage.routeName:
               return MaterialPageRoute(builder: (_) => const TasbihPage());
             case DoaPage.routeName:
-              return MaterialPageRoute(builder: (_) => DoaPage());
+              return MaterialPageRoute(builder: (_) => const DoaPage());
             case FavoriteDoaPage.routeName:
-              return MaterialPageRoute(builder: (_) => FavoriteDoaPage());
+              return MaterialPageRoute(builder: (_) => const FavoriteDoaPage());
             case DoaDetailPage.routeName:
               final id = settings.arguments as String;
               return MaterialPageRoute(
                   builder: (_) => DoaDetailPage(id: id), settings: settings);
             case KiblatPage.routeName:
-              return MaterialPageRoute(
-                  builder: (_) => const KiblatPage());
+              return MaterialPageRoute(builder: (_) => const KiblatPage());
             case CatatanIbadahPage.routeName:
               return MaterialPageRoute(
                   builder: (_) => const CatatanIbadahPage());

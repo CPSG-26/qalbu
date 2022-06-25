@@ -9,7 +9,7 @@ import 'package:qalbu/presentation/pages/quran_page.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 class MenuWidget extends StatelessWidget {
-  var now = DateTime.now();
+  final DateTime now = DateTime.now();
   final double lat;
   final double long;
   final String currentAdress;
@@ -56,9 +56,11 @@ class MenuWidget extends StatelessWidget {
                     year: now.year,
                     currentAddress: currentAdress),
               );
-            } else if (menu.id == '5') {
+            }
+            else if (menu.id == '5') {
               Navigator.pushNamed(context, KiblatPage.routeName);
-            } else if (menu.id == '6') {
+            }
+            else if (menu.id == '6') {
               Navigator.pushNamed(context, CatatanIbadahPage.routeName);
             }
           },

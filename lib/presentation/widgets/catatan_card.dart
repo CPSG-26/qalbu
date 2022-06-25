@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/data/models/catatan_model.dart';
 import 'package:flutter/material.dart';

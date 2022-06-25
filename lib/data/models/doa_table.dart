@@ -5,7 +5,7 @@ class DoaTable extends Equatable {
   final String id;
   final String? doa;
 
-  DoaTable({
+  const DoaTable({
     required this.id,
     required this.doa,
   });
