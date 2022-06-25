@@ -35,6 +35,8 @@ dependencies:
   slide_countdown:
     git:
       url: https://github.com/degalih/slide_countdown
+  firebase_core: ^1.17.1
+  firebase_auth: ^3.3.19
 
 dev_dependencies:
   flutter_test:
