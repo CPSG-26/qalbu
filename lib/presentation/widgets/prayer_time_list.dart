@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/domain/entities/datum.dart';
+import 'package:qalbu/presentation/widgets/prayer_time_card/ashar_card.dart';
+import 'package:qalbu/presentation/widgets/prayer_time_card/dzuhur_card.dart';
+import 'package:qalbu/presentation/widgets/prayer_time_card/imsak_card.dart';
+import 'package:qalbu/presentation/widgets/prayer_time_card/isya_card.dart';
+import 'package:qalbu/presentation/widgets/prayer_time_card/maghrib_card.dart';
+import 'package:qalbu/presentation/widgets/prayer_time_card/shubuh_card.dart';
 
 class PrayerTimeList extends StatefulWidget {
   final List<Datum> jadwal;
@@ -137,13 +143,13 @@ class _PrayerTimeListState extends State<PrayerTimeList> {
             child: TabBarView(
               children: widget.jadwal.map((jadwal) {
                 return ListView(
-                  children: const [
-                    // ImsakCard(jadwal.timings.imsak, 'Imsak'),
-                    // ShubuhCard(jadwal.timings.fajr, 'Shubuh'),
-                    // DzuhurCard(jadwal.timings.dhuhr, 'Dzuhur'),
-                    // AsharCard(jadwal.timings.asr, 'Ashar'),
-                    // MaghribCard(jadwal.timings.maghrib, 'Maghrib'),
-                    // IsyaCard(jadwal.timings.isha, 'Isya'),
+                  children: [
+                    ImsakCard(jadwal.timings.imsak, 'Imsak'),
+                    ShubuhCard(jadwal.timings.fajr, 'Shubuh'),
+                    DzuhurCard(jadwal.timings.dhuhr, 'Dzuhur'),
+                    AsharCard(jadwal.timings.asr, 'Ashar'),
+                    MaghribCard(jadwal.timings.maghrib, 'Maghrib'),
+                    IsyaCard(jadwal.timings.isha, 'Isya'),
                   ],
                 );
               }).toList(),

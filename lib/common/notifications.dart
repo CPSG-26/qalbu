@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/foundation.dart';
 
 Future<void> createPrayerTimeNotification(
     int id, int hour, int minute, String title, String body) async {
@@ -22,4 +23,7 @@ Future<void> createPrayerTimeNotification(
 
 Future<void> cancelPrayerTimeNotification(int id) async {
   await AwesomeNotifications().cancelSchedule(id);
+  if (kDebugMode) {
+    print('Scheduled canceled');
+  }
 }
