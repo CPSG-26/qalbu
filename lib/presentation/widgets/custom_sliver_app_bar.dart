@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalbu/common/colors.dart';
+import 'package:qalbu/presentation/pages/profile_page.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  final String? userName;
   final double expandedHeight;
   final String nextPrayerTime;
   final String currentDate;
@@ -13,6 +15,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final int seconds;
 
   const CustomSliverAppBarDelegate({
+    required this.userName,
     required this.expandedHeight,
     required this.nextPrayerTime,
     required this.currentDate,
@@ -33,12 +36,12 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       fit: StackFit.expand,
       children: [
         buildBackground(shrinkOffset),
-        buildAppBar(shrinkOffset),
+        buildAppBar(context, shrinkOffset),
         Positioned(
           top: top,
           left: 8,
           right: 8,
-          child: buildFloating(shrinkOffset),
+          child: buildFloating(context, shrinkOffset),
         ),
       ],
     );
@@ -52,7 +55,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return 1 - shrinkOffset / expandedHeight;
   }
 
-  Widget buildAppBar(double shrinkOffset) {
+  Widget buildAppBar(BuildContext context, double shrinkOffset) {
     return Opacity(
       opacity: appear(shrinkOffset),
       child: AppBar(
@@ -71,7 +74,9 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
               Icons.person,
               size: 32,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, ProfilePage.routeName);
+            },
           ),
           const SizedBox(width: 12),
         ],
@@ -88,7 +93,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             header: Container(
               padding: const EdgeInsets.only(top: 36),
               child: Text(
-                'Assalamu\'alaikum, Budi',
+                'Assalamu\'alaikum, $userName',
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   color: kTertiaryTextColor,
@@ -106,7 +111,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Widget buildFloating(double shrinkOffset) {
+  Widget buildFloating(BuildContext context, double shrinkOffset) {
     return Opacity(
       opacity: disappear(shrinkOffset),
       child: Card(
@@ -127,7 +132,9 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                       size: 32,
                       color: kPrimary,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, ProfilePage.routeName);
+                    },
                   ),
                 ],
               ),

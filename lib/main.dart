@@ -1,10 +1,12 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/common/utils.dart';
+import 'package:qalbu/firebase_options.dart';
 import 'package:qalbu/injection.dart' as di;
 import 'package:qalbu/presentation/bloc/doa_detail/doa_detail_bloc.dart';
 import 'package:qalbu/presentation/bloc/doa_list/doa_list_bloc.dart';
@@ -19,14 +21,20 @@ import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/favorite_doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
 import 'package:qalbu/presentation/pages/kiblat_page.dart';
+import 'package:qalbu/presentation/pages/login_page.dart';
 import 'package:qalbu/presentation/pages/prayer_time_page.dart';
+import 'package:qalbu/presentation/pages/profile_page.dart';
 import 'package:qalbu/presentation/pages/quran_detail_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';
+import 'package:qalbu/presentation/pages/register_page.dart';
 import 'package:qalbu/presentation/pages/splash_screen.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   AwesomeNotifications().initialize(
     'resource://drawable/res_app_icon',
@@ -77,6 +85,12 @@ class MyApp extends StatelessWidget {
           switch (settings.name) {
             case SplashScreen.routeName:
               return MaterialPageRoute(builder: (_) => const SplashScreen());
+            case LoginPage.routeName:
+              return MaterialPageRoute(builder: (_) => const LoginPage());
+            case RegisterPage.routeName:
+              return MaterialPageRoute(builder: (_) => const RegisterPage());
+            case ProfilePage.routeName:
+              return MaterialPageRoute(builder: (_) => const ProfilePage());
             case HomePage.routeName:
               return MaterialPageRoute(builder: (_) => const HomePage());
             case QuranPage.routeName:

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "30724928873",
+    "project_id": "com-cpsg26-qalbu",
+    "storage_bucket": "com-cpsg26-qalbu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30724928873:android:10a8acc0345e49b99f79f8",
+        "android_client_info": {
+          "package_name": "com.cpsg26.qalbu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30724928873-q33v6o6uo406rkigtks18f1lcaduj98p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUwg7DDhgH5UrZq04FoMm4QSaE8OU3Mt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30724928873-q33v6o6uo406rkigtks18f1lcaduj98p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
