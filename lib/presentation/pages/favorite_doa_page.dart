@@ -10,10 +10,10 @@ class FavoriteDoaPage extends StatefulWidget {
   const FavoriteDoaPage({Key? key}) : super(key: key);
 
   @override
-  _FavoriteDoaPageState createState() => _FavoriteDoaPageState();
+  FavoriteDoaPageState createState() => FavoriteDoaPageState();
 }
 
-class _FavoriteDoaPageState extends State<FavoriteDoaPage> with RouteAware {
+class FavoriteDoaPageState extends State<FavoriteDoaPage> with RouteAware {
   @override
   void initState() {
     super.initState();

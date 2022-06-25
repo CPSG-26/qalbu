@@ -6,7 +6,7 @@ import 'package:qalbu/presentation/pages/doa_detail_page.dart';
 class DoaWidget extends StatelessWidget {
   final Doa doa;
 
-  const DoaWidget(this.doa);
+  const DoaWidget(this.doa, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

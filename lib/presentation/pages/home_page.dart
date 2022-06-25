@@ -40,12 +40,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      context.read<DoaListBloc>().add(GetDoaListEvent());
-    });
+    Future.microtask(() {});
     _getCurrentLocation().whenComplete(() => Future.microtask(() {
           context.read<PrayerTimeDailyBloc>().add(FetchPrayerTimeDaily(
               date, _currentPosition!.latitude, _currentPosition!.longitude));
+          context.read<DoaListBloc>().add(GetDoaListEvent());
         }));
   }
 
@@ -185,7 +184,7 @@ class _HomePageState extends State<HomePage> {
               context: context,
               removeTop: true,
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   final doa = state.result[index];

@@ -10,7 +10,7 @@ class DoaDetailPage extends StatefulWidget {
 
   final String id;
 
-  const DoaDetailPage({required this.id});
+  const DoaDetailPage({Key? key, required this.id}) : super(key: key);
 
   @override
   State<DoaDetailPage> createState() => _DoaDetailPageState();
@@ -75,7 +75,7 @@ class DetailContent extends StatelessWidget {
   final Doa doa;
   final bool isAddedFavorite;
 
-  const DetailContent(this.doa, this.isAddedFavorite);
+  const DetailContent(this.doa, this.isAddedFavorite, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

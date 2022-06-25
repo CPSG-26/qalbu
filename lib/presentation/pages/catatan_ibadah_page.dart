@@ -35,6 +35,7 @@ class _CatatanIbadahPageState extends State<CatatanIbadahPage> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               InkWell(
                 onTap: () {
