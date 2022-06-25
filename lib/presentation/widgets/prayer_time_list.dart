@@ -1,20 +1,69 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/text_styles.dart';
 import 'package:qalbu/domain/entities/datum.dart';
-import 'package:qalbu/presentation/widgets/prayer_time_card.dart';
 
-class PrayerTimeList extends StatelessWidget {
+class PrayerTimeList extends StatefulWidget {
   final List<Datum> jadwal;
+
+  const PrayerTimeList({Key? key, required this.jadwal}) : super(key: key);
+
+  @override
+  State<PrayerTimeList> createState() => _PrayerTimeListState();
+}
+
+class _PrayerTimeListState extends State<PrayerTimeList> {
   final dateTime = DateTime.now();
 
-  PrayerTimeList({Key? key, required this.jadwal}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    AwesomeNotifications().isNotificationAllowed().then(
+      (isAllowed) {
+        if (!isAllowed) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Allow Notifications'),
+              content:
+                  const Text('Our app would like to send you notifications'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Don\'t Allow',
+                    style: TextStyle(color: Colors.grey, fontSize: 18),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => AwesomeNotifications()
+                      .requestPermissionToSendNotifications()
+                      .then((_) => Navigator.pop(context)),
+                  child: const Text(
+                    'Allow',
+                    style: TextStyle(
+                      color: kPrimary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: dateTime.day - 1,
-      length: jadwal.length,
+      length: widget.jadwal.length,
       child: Column(
         children: <Widget>[
           Container(
@@ -29,7 +78,7 @@ class PrayerTimeList extends StatelessWidget {
               indicatorSize: TabBarIndicatorSize.label,
               indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(8), color: kPrimary),
-              tabs: jadwal.map((jadwal) {
+              tabs: widget.jadwal.map((jadwal) {
                 return SizedBox(
                   height: 70,
                   child: AspectRatio(
@@ -86,15 +135,15 @@ class PrayerTimeList extends StatelessWidget {
           ),
           Expanded(
             child: TabBarView(
-              children: jadwal.map((jadwal) {
+              children: widget.jadwal.map((jadwal) {
                 return ListView(
-                  children: [
-                    PrayerTimeCard(jadwal.timings.imsak, 'Imsak'),
-                    PrayerTimeCard(jadwal.timings.fajr, 'Shubuh'),
-                    PrayerTimeCard(jadwal.timings.dhuhr, 'Dzuhur'),
-                    PrayerTimeCard(jadwal.timings.asr, 'Ashar'),
-                    PrayerTimeCard(jadwal.timings.maghrib, 'Maghrib'),
-                    PrayerTimeCard(jadwal.timings.isha, 'Isya'),
+                  children: const [
+                    // ImsakCard(jadwal.timings.imsak, 'Imsak'),
+                    // ShubuhCard(jadwal.timings.fajr, 'Shubuh'),
+                    // DzuhurCard(jadwal.timings.dhuhr, 'Dzuhur'),
+                    // AsharCard(jadwal.timings.asr, 'Ashar'),
+                    // MaghribCard(jadwal.timings.maghrib, 'Maghrib'),
+                    // IsyaCard(jadwal.timings.isha, 'Isya'),
                   ],
                 );
               }).toList(),
