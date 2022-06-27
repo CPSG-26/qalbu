@@ -4,7 +4,8 @@ class KiblatLocationErrorWidget extends StatelessWidget {
   final String? error;
   final Function? callback;
 
-  const KiblatLocationErrorWidget({Key? key, this.error, this.callback}) : super(key: key);
+  const KiblatLocationErrorWidget({Key? key, this.error, this.callback})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

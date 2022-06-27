@@ -16,23 +16,20 @@ class FavoriteDoaBloc extends Bloc<FavoriteDoaEvent, FavoriteDoaState> {
   final RemoveFavoriteDoa removeFavoriteDoa;
 
   FavoriteDoaBloc(
-      this.getFavoriteDoa,
-      this.getFavoriteStatusDoa,
-      this.saveFavoriteDoa,
-      this.removeFavoriteDoa,
-      ) : super(FavoriteDoaEmpty()) {
+    this.getFavoriteDoa,
+    this.getFavoriteStatusDoa,
+    this.saveFavoriteDoa,
+    this.removeFavoriteDoa,
+  ) : super(FavoriteDoaEmpty()) {
     on<GetListEvent>((event, emit) async {
       emit(FavoriteDoaLoading());
       final result = await getFavoriteDoa.execute();
 
-      result.fold(
-              (failure) {
-            emit(FavoriteDoaError(failure.message));
-          },
-              (data) {
-            data.isEmpty ? emit(FavoriteDoaEmpty()) : emit(FavoriteDoaLoaded(data));
-          }
-      );
+      result.fold((failure) {
+        emit(FavoriteDoaError(failure.message));
+      }, (data) {
+        data.isEmpty ? emit(FavoriteDoaEmpty()) : emit(FavoriteDoaLoaded(data));
+      });
     });
 
     on<GetStatusDoaEvent>((event, emit) async {
@@ -44,28 +41,22 @@ class FavoriteDoaBloc extends Bloc<FavoriteDoaEvent, FavoriteDoaState> {
       final doa = event.doa;
       final result = await saveFavoriteDoa.execute(doa);
 
-      result.fold(
-              (failure) {
-            emit(FavoriteDoaError(failure.message));
-          },
-              (successMessage) {
-            emit(FavoriteDoaSuccess(successMessage));
-          }
-      );
+      result.fold((failure) {
+        emit(FavoriteDoaError(failure.message));
+      }, (successMessage) {
+        emit(FavoriteDoaSuccess(successMessage));
+      });
     });
 
     on<RemoveItemDoaEvent>((event, emit) async {
       final doa = event.doa;
       final result = await removeFavoriteDoa.execute(doa);
 
-      result.fold(
-              (failure) {
-                emit(FavoriteDoaError(failure.message));
-          },
-              (successMessage) {
-                emit(FavoriteDoaSuccess(successMessage));
-          }
-      );
+      result.fold((failure) {
+        emit(FavoriteDoaError(failure.message));
+      }, (successMessage) {
+        emit(FavoriteDoaSuccess(successMessage));
+      });
     });
   }
 }

@@ -11,24 +11,24 @@ class DoaTable extends Equatable {
   });
 
   factory DoaTable.fromEntity(Doa doa) => DoaTable(
-    id: doa.id,
-    doa: doa.doa,
-  );
+        id: doa.id,
+        doa: doa.doa,
+      );
 
   factory DoaTable.fromMap(Map<String, dynamic> map) => DoaTable(
-    id: map['id'],
-    doa: map['doa'],
-  );
+        id: map['id'],
+        doa: map['doa'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'doa': doa,
-  };
+        'id': id,
+        'doa': doa,
+      };
 
   Doa toEntity() => Doa.favorite(
-    id: id,
-    doa: doa,
-  );
+        id: id,
+        doa: doa,
+      );
 
   @override
   List<Object?> get props => [id, doa];

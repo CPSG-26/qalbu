@@ -74,8 +74,18 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
                       child: PrayerTimeList(jadwal: state.prayerTimeList.data)),
                 ],
               );
+            } else if (state is PrayerTimeMonthlyError) {
+              return Center(
+                key: const Key('error_message'),
+                child: Text(
+                  state.message,
+                  style: const TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+              );
             } else {
-              return const Text('Failed');
+              return Container();
             }
           },
         ),

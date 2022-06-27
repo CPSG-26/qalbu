@@ -46,7 +46,7 @@ class DoaRepositoryImpl implements DoaRepository {
   Future<Either<Failure, String>> saveFavorite(Doa doa) async {
     try {
       final result =
-      await doaLocalDataSource.insertFavorite(DoaTable.fromEntity(doa));
+          await doaLocalDataSource.insertFavorite(DoaTable.fromEntity(doa));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -59,7 +59,7 @@ class DoaRepositoryImpl implements DoaRepository {
   Future<Either<Failure, String>> removeFavorite(Doa doa) async {
     try {
       final result =
-      await doaLocalDataSource.removeFavorite(DoaTable.fromEntity(doa));
+          await doaLocalDataSource.removeFavorite(DoaTable.fromEntity(doa));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));

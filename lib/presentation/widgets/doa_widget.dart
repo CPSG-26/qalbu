@@ -28,9 +28,7 @@ class DoaWidget extends StatelessWidget {
               child: Text(
                 doa.doa ?? '-',
                 style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500
-                ),
+                    fontSize: 15, fontWeight: FontWeight.w500),
               ),
             ),
           ),

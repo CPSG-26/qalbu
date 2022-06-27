@@ -56,11 +56,9 @@ class MenuWidget extends StatelessWidget {
                     year: now.year,
                     currentAddress: currentAdress),
               );
-            }
-            else if (menu.id == '5') {
+            } else if (menu.id == '5') {
               Navigator.pushNamed(context, KiblatPage.routeName);
-            }
-            else if (menu.id == '6') {
+            } else if (menu.id == '6') {
               Navigator.pushNamed(context, CatatanIbadahPage.routeName);
             }
           },

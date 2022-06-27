@@ -28,17 +28,17 @@ class _TasbihPageState extends State<TasbihPage> {
   }
 
   void _incrementCounter() {
-    if(_number == TasbihNumber.number33) {
-      if(_counter == 32) {
+    if (_number == TasbihNumber.number33) {
+      if (_counter == 32) {
         Vibration.vibrate(duration: 800);
         setState(() {
           _counter++;
           _saveNumber();
         });
-      }else if(_counter == 33) {
+      } else if (_counter == 33) {
         HapticFeedback.lightImpact();
         _resetNumber();
-      }else {
+      } else {
         setState(() {
           HapticFeedback.lightImpact();
           _counter++;
@@ -46,17 +46,17 @@ class _TasbihPageState extends State<TasbihPage> {
         });
       }
     }
-    if(_number == TasbihNumber.number99) {
-      if(_counter == 98) {
+    if (_number == TasbihNumber.number99) {
+      if (_counter == 98) {
         Vibration.vibrate(duration: 800);
         setState(() {
           _counter++;
           _saveNumber();
         });
-      }else if(_counter == 99) {
+      } else if (_counter == 99) {
         HapticFeedback.lightImpact();
         _resetNumber();
-      }else {
+      } else {
         setState(() {
           HapticFeedback.lightImpact();
           _counter++;
@@ -69,7 +69,7 @@ class _TasbihPageState extends State<TasbihPage> {
   void _decrementCounter() {
     setState(() {
       HapticFeedback.lightImpact();
-      _counter<=0 ? _counter=0 : _counter--;
+      _counter <= 0 ? _counter = 0 : _counter--;
       _saveNumber();
     });
   }
@@ -131,8 +131,7 @@ class _TasbihPageState extends State<TasbihPage> {
                   Text(
                     '$_counter',
                     style: GoogleFonts.poppins(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w500),
+                        fontSize: 42, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(width: 30),
                   SizedBox(
@@ -159,9 +158,7 @@ class _TasbihPageState extends State<TasbihPage> {
               child: Material(
                 elevation: 5,
                 shape: const CircleBorder(
-                  side: BorderSide(
-                    width: 0.5,
-                    color: Colors.black12),
+                  side: BorderSide(width: 0.5, color: Colors.black12),
                 ),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: InkWell(
@@ -179,14 +176,13 @@ class _TasbihPageState extends State<TasbihPage> {
                   title: Text(
                     '33',
                     style: GoogleFonts.poppins(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500
-                    ),
+                        fontSize: 22, fontWeight: FontWeight.w500),
                   ),
                   leading: Radio<TasbihNumber>(
                     value: TasbihNumber.number33,
                     groupValue: _number,
-                    fillColor: MaterialStateColor.resolveWith((states) => kPrimary),
+                    fillColor:
+                        MaterialStateColor.resolveWith((states) => kPrimary),
                     onChanged: (TasbihNumber? value) {
                       setState(() {
                         _number = value;
@@ -199,14 +195,13 @@ class _TasbihPageState extends State<TasbihPage> {
                   title: Text(
                     '99',
                     style: GoogleFonts.poppins(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500
-                    ),
+                        fontSize: 22, fontWeight: FontWeight.w500),
                   ),
                   leading: Radio<TasbihNumber>(
                     value: TasbihNumber.number99,
                     groupValue: _number,
-                    fillColor: MaterialStateColor.resolveWith((states) => kPrimary),
+                    fillColor:
+                        MaterialStateColor.resolveWith((states) => kPrimary),
                     onChanged: (TasbihNumber? value) {
                       setState(() {
                         _number = value;

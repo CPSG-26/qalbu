@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       .format(DateTime.now().add(const Duration(days: 1)));
 
   late Datum data;
-  late Position? _currentPosition;
+  Position? _currentPosition;
   String? _currentAddress;
   String? prayerHours;
   String? prayerMinutes;
@@ -97,8 +97,20 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           );
+        } else if (state is PrayerTimeDailyError) {
+          return Scaffold(
+            body: Center(
+              key: const Key('error_message'),
+              child: Text(
+                state.message,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          );
         } else {
-          return const Text('Failed');
+          return Container();
         }
       },
     );
@@ -112,8 +124,8 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             MenuWidget(
-              lat: _currentPosition!.latitude,
-              long: _currentPosition!.longitude,
+              lat: _currentPosition?.latitude ?? 0,
+              long: _currentPosition?.longitude ?? 0,
               currentAdress: _currentAddress ?? '-',
             ),
             const SizedBox(height: 4),

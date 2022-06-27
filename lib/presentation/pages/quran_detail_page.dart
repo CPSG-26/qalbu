@@ -38,8 +38,20 @@ class _QuranDetailPageState extends State<QuranDetailPage> {
             ),
             body: AyatCard(quranDetail: state.quran),
           );
+        } else if (state is QuranError) {
+          return Scaffold(
+            body: Center(
+              key: const Key('error_message'),
+              child: Text(
+                state.message,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          );
         } else {
-          return const Text('Failed');
+          return Container();
         }
       }),
     );
