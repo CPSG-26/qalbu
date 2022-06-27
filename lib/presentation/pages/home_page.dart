@@ -97,8 +97,20 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           );
+        } else if (state is PrayerTimeDailyError) {
+          return Scaffold(
+            body: Center(
+              key: const Key('error_message'),
+              child: Text(
+                state.message,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          );
         } else {
-          return const Text('Failed');
+          return Container();
         }
       },
     );

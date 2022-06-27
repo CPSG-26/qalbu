@@ -33,8 +33,18 @@ class _QuranPageState extends State<QuranPage> {
             return const Center(child: CircularProgressIndicator());
           } else if (state is QuranHasData) {
             return QuranList(quranList: state.quranList);
+          } else if (state is QuranError) {
+            return Center(
+              key: const Key('error_message'),
+              child: Text(
+                state.message,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            );
           } else {
-            return const Text('Failed');
+            return Container();
           }
         }),
       ),
