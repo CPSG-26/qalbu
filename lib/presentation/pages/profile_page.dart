@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qalbu/common/colors.dart';
 import 'package:qalbu/common/text_styles.dart';
+import 'package:qalbu/presentation/pages/legal_page.dart';
 import 'package:qalbu/presentation/pages/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -58,23 +59,96 @@ class _ProfilePageState extends State<ProfilePage> {
                   style: kHeading5,
                 )),
                 Center(
-                    child: Text(
-                  _activeUser.email!,
-                  style: kHeading6.copyWith(color: kSecondaryTextColor),
-                )),
-                const Card(
-                  child: ListTile(
-                    title: Text('Tentang'),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                  child: Text(
+                    _activeUser.email!,
+                    style: kHeading6.copyWith(color: kSecondaryTextColor),
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.3,
+                Card(
+                  child: ListTile(
+                    title: const Text('Tentang'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        LegalPage.routeName,
+                        arguments: const LegalPage(
+                          title: 'Tentang',
+                          content: 'about.md',
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: const Text('Pengembang'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        LegalPage.routeName,
+                        arguments: const LegalPage(
+                          title: 'Pengembang',
+                          content: 'developer.md',
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: const Text('Kebijakan Privasi'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        LegalPage.routeName,
+                        arguments: const LegalPage(
+                          title: 'Kebijakan Privasi',
+                          content: 'privacy_policy.md',
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: const Text('Syarat dan Ketentuan'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        LegalPage.routeName,
+                        arguments: const LegalPage(
+                          title: 'Syarat dan Ketentuan',
+                          content: 'terms_conditions.md',
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: const Text('Credit'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        LegalPage.routeName,
+                        arguments: const LegalPage(
+                          title: 'Credit',
+                          content: 'credit.md',
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
           ),
         ),
+        floatingActionButton: Text('Versi 1.0.0', style: kBodyText,),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16),
           child: MaterialButton(
