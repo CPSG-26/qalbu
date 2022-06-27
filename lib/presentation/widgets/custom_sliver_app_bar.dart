@@ -64,22 +64,10 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             const SizedBox(width: 8),
             Image.asset(
               "assets/logo/qalbu-white-transparent.png",
-              height: 27,
+              height: 32,
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.person,
-              size: 32,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, ProfilePage.routeName);
-            },
-          ),
-          const SizedBox(width: 12),
-        ],
       ),
     );
   }
@@ -124,7 +112,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                 children: [
                   Image.asset(
                     "assets/logo/qalbu-transparent.png",
-                    height: 27,
+                    height: 32,
                   ),
                   IconButton(
                     icon: const Icon(

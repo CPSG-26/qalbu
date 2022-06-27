@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
@@ -21,6 +25,7 @@ import 'package:qalbu/presentation/pages/doa_page.dart';
 import 'package:qalbu/presentation/pages/favorite_doa_page.dart';
 import 'package:qalbu/presentation/pages/home_page.dart';
 import 'package:qalbu/presentation/pages/kiblat_page.dart';
+import 'package:qalbu/presentation/pages/legal_page.dart';
 import 'package:qalbu/presentation/pages/login_page.dart';
 import 'package:qalbu/presentation/pages/prayer_time_page.dart';
 import 'package:qalbu/presentation/pages/profile_page.dart';
@@ -55,10 +60,39 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   static const String title = 'Qalbu';
 
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late StreamSubscription<User?> user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user == null) {
+        if (kDebugMode) {
+          print('User is currently signed out!');
+        }
+      } else {
+        if (kDebugMode) {
+          print('User is signed in!');
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    user.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +107,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<PrayerTimeDailyBloc>()),
       ],
       child: MaterialApp(
-        title: title,
+        title: MyApp.title,
         theme: ThemeData(
             colorScheme: kColorScheme,
             primaryColor: kPrimary,
             textTheme: kTextTheme,
             scaffoldBackgroundColor: Colors.white),
-        home: const SplashScreen(),
+        home: FirebaseAuth.instance.currentUser == null
+            ? const LoginPage()
+            : const HomePage(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
@@ -122,6 +158,14 @@ class MyApp extends StatelessWidget {
                   month: argument.month,
                   year: argument.year,
                   currentAddress: argument.currentAddress,
+                );
+              });
+            case LegalPage.routeName:
+              return MaterialPageRoute(builder: (_) {
+                LegalPage argument = settings.arguments as LegalPage;
+                return LegalPage(
+                  title: argument.title,
+                  content: argument.content,
                 );
               });
             default:
