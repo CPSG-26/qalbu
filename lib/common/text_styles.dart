@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-var ramadhaniStyle = const TextStyle(fontFamily: 'Ramadhani');
-var atTupatsStyle = const TextStyle(fontFamily: 'At-Tupats');
-
 final TextStyle kHeading5 =
     GoogleFonts.poppins(fontSize: 23, fontWeight: FontWeight.w400);
 final TextStyle kHeading6 = GoogleFonts.poppins(
