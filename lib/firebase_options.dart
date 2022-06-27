@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '30724928873',
     projectId: 'com-cpsg26-qalbu',
     storageBucket: 'com-cpsg26-qalbu.appspot.com',
-    iosClientId: '30724928873-vplbkbstsc1u86n8gr6dqhilq9cpi12m.apps.googleusercontent.com',
+    iosClientId:
+        '30724928873-vplbkbstsc1u86n8gr6dqhilq9cpi12m.apps.googleusercontent.com',
     iosBundleId: 'com.cpsg26.qalbu',
   );
 }

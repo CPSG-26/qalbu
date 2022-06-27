@@ -9,21 +9,16 @@ part 'doa_list_state.dart';
 class DoaListBloc extends Bloc<DoaListEvent, DoaListState> {
   final GetDoaList getDoaList;
 
-  DoaListBloc(
-      this.getDoaList
-      ) : super(DoaListEmpty()) {
+  DoaListBloc(this.getDoaList) : super(DoaListEmpty()) {
     on<GetDoaListEvent>((event, emit) async {
       emit(DoaListLoading());
       final result = await getDoaList.execute();
 
-      result.fold(
-              (failure) {
-                emit(DoaListError(failure.message));
-          },
-              (data) {
-                emit(DoaListLoaded(data));
-          }
-      );
+      result.fold((failure) {
+        emit(DoaListError(failure.message));
+      }, (data) {
+        emit(DoaListLoaded(data));
+      });
     });
   }
 }

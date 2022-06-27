@@ -8,7 +8,8 @@ class DoaDatabaseHelper {
     _databaseHelper = this;
   }
 
-  factory DoaDatabaseHelper() => _databaseHelper ?? DoaDatabaseHelper._instance();
+  factory DoaDatabaseHelper() =>
+      _databaseHelper ?? DoaDatabaseHelper._instance();
 
   static Database? _database;
 

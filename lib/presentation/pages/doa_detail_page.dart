@@ -35,7 +35,8 @@ class _DoaDetailPageState extends State<DoaDetailPage> {
       body: BlocListener<FavoriteDoaBloc, FavoriteDoaState>(
         listener: (_, state) {
           if (state is FavoriteDoaSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
             context.read<FavoriteDoaBloc>().add(GetStatusDoaEvent(widget.id));
           }
         },
@@ -47,12 +48,14 @@ class _DoaDetailPageState extends State<DoaDetailPage> {
               );
             } else if (state is DoaDetailLoaded) {
               final doa = state.result;
-              bool isAddedToFavorite = (context.watch<FavoriteDoaBloc>().state is FavoriteDoaStatusLoaded) ? (context.read<FavoriteDoaBloc>().state as FavoriteDoaStatusLoaded).result : false;
+              bool isAddedToFavorite = (context.watch<FavoriteDoaBloc>().state
+                      is FavoriteDoaStatusLoaded)
+                  ? (context.read<FavoriteDoaBloc>().state
+                          as FavoriteDoaStatusLoaded)
+                      .result
+                  : false;
               return SafeArea(
-                child: DetailContent(
-                  doa,
-                  isAddedToFavorite
-                ),
+                child: DetailContent(doa, isAddedToFavorite),
               );
             } else {
               return const Center(
@@ -75,7 +78,8 @@ class DetailContent extends StatelessWidget {
   final Doa doa;
   final bool isAddedFavorite;
 
-  const DetailContent(this.doa, this.isAddedFavorite, {Key? key}) : super(key: key);
+  const DetailContent(this.doa, this.isAddedFavorite, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +117,7 @@ class DetailContent extends StatelessWidget {
               children: <Widget>[
                 Text(
                   doa.latin ?? '-',
-                  style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      color: Colors.grey
-                  ),
+                  style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey),
                   textAlign: TextAlign.justify,
                 ),
                 const SizedBox(height: 10),
@@ -135,9 +136,11 @@ class DetailContent extends StatelessWidget {
               child: FloatingActionButton(
                 onPressed: () async {
                   if (!isAddedFavorite) {
-                    BlocProvider.of<FavoriteDoaBloc>(context).add(AddItemDoaEvent(doa));
+                    BlocProvider.of<FavoriteDoaBloc>(context)
+                        .add(AddItemDoaEvent(doa));
                   } else {
-                    BlocProvider.of<FavoriteDoaBloc>(context).add(RemoveItemDoaEvent(doa));
+                    BlocProvider.of<FavoriteDoaBloc>(context)
+                        .add(RemoveItemDoaEvent(doa));
                   }
                 },
                 child: Row(

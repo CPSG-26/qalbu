@@ -148,7 +148,10 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-        floatingActionButton: Text('Versi 1.0.0', style: kBodyText,),
+        floatingActionButton: Text(
+          'Versi 1.0.0',
+          style: kBodyText,
+        ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16),
           child: MaterialButton(

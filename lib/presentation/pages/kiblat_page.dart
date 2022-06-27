@@ -16,7 +16,8 @@ class KiblatPage extends StatefulWidget {
 }
 
 class _KiblatPageState extends State<KiblatPage> {
-  final _locationStreamController = StreamController<LocationStatus>.broadcast();
+  final _locationStreamController =
+      StreamController<LocationStatus>.broadcast();
 
   get stream => _locationStreamController.stream;
 
@@ -50,12 +51,14 @@ class _KiblatPageState extends State<KiblatPage> {
                   return const KiblatWidget();
                 case LocationPermission.denied:
                   return KiblatLocationErrorWidget(
-                    error: "Location service permission denied!\nPlease allow your app location permission and try again.",
+                    error:
+                        "Location service permission denied!\nPlease allow your app location permission and try again.",
                     callback: _checkLocationStatus,
                   );
                 case LocationPermission.deniedForever:
                   return KiblatLocationErrorWidget(
-                    error: "Location service denied forever!\nPlease allow your app location permission and try again.",
+                    error:
+                        "Location service denied forever!\nPlease allow your app location permission and try again.",
                     callback: _checkLocationStatus,
                   );
                 default:
@@ -75,7 +78,8 @@ class _KiblatPageState extends State<KiblatPage> {
 
   Future<void> _checkLocationStatus() async {
     final locationStatus = await FlutterQiblah.checkLocationStatus();
-    if (locationStatus.enabled && locationStatus.status == LocationPermission.denied) {
+    if (locationStatus.enabled &&
+        locationStatus.status == LocationPermission.denied) {
       await FlutterQiblah.requestPermissions();
       final status = await FlutterQiblah.checkLocationStatus();
       _locationStreamController.sink.add(status);
@@ -83,6 +87,7 @@ class _KiblatPageState extends State<KiblatPage> {
       _locationStreamController.sink.add(locationStatus);
     }
   }
+
   @override
   void dispose() {
     super.dispose();

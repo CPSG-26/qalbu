@@ -30,7 +30,10 @@ class _DoaPageState extends State<DoaPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const FavoriteDoaPage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FavoriteDoaPage()));
             },
             icon: const Icon(
               Icons.bookmark,

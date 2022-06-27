@@ -32,7 +32,6 @@ import 'package:qalbu/presentation/pages/profile_page.dart';
 import 'package:qalbu/presentation/pages/quran_detail_page.dart';
 import 'package:qalbu/presentation/pages/quran_page.dart';
 import 'package:qalbu/presentation/pages/register_page.dart';
-import 'package:qalbu/presentation/pages/splash_screen.dart';
 import 'package:qalbu/presentation/pages/tasbih_page.dart';
 
 void main() async {
@@ -119,8 +118,6 @@ class _MyAppState extends State<MyApp> {
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case SplashScreen.routeName:
-              return MaterialPageRoute(builder: (_) => const SplashScreen());
             case LoginPage.routeName:
               return MaterialPageRoute(builder: (_) => const LoginPage());
             case RegisterPage.routeName:

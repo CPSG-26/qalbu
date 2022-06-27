@@ -24,10 +24,10 @@ class Doa extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    doa,
-    ayat,
-    latin,
-    artinya,
-  ];
+        id,
+        doa,
+        ayat,
+        latin,
+        artinya,
+      ];
 }
