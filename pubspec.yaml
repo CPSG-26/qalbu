@@ -37,6 +37,8 @@ dependencies:
       url: https://github.com/degalih/slide_countdown
   firebase_core: ^1.17.1
   firebase_auth: ^3.3.19
+  flutter_markdown: ^0.6.10+2
+  flutter_native_splash: ^2.2.3+1
 
 dev_dependencies:
   flutter_test:
@@ -51,3 +53,8 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/logo/
+    - legal/
+
+flutter_native_splash:
+  color: "#629C59"
+  image: assets/logo/qalbu_splash.png
