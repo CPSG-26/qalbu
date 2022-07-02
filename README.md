@@ -26,7 +26,7 @@
     <a href="https://github.com/CPSG-26/qalbu"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/CPSG-26/qalbu">View Demo</a>
+    <a href="https://qalbu.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/CPSG-26/qalbu/issues">Report Bug</a>
     ·
@@ -65,8 +65,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Musafir sering mengalami kesulitan dalam mengetahui jadwal sholat. Oleh karena itu, dibuat aplikasi untuk membantu musafir dalam urusan ibadahnya seperti mengetahui jadwal shalat secara aktual dan kegiatan ibadah lainnya. Qalbu dapat meningkatkan keefektifan pengguna dalam membantu urusan ibadahnya. Keunggulan dari Qalbu adalah terbebas dari iklan, terdapat fitur to-do list untuk mencatat kegiatan ibadah, dan semua fitur dapat digunakan secara gratis.
 
