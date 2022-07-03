@@ -127,9 +127,15 @@ Install Android Studio or any IDE support Dart & Flutter
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+| Al-Qur'an | Tasbih | Doa |
+| ----------- | ----------- | -------- |
+| ![al-quran](https://raw.githubusercontent.com/CPSG-26/qalbu/master/screenshots/al_quran.gif) | ![tasbih](https://raw.githubusercontent.com/CPSG-26/qalbu/master/screenshots/tasbih.gif) | ![doa](https://raw.githubusercontent.com/CPSG-26/qalbu/master/screenshots/doa_doa.gif) |
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+| Jadwal Sholat | Arah Kiblat | Catatan Ibadah |
+| ----------- | ----------- | -------- |
+| ![jadwal sholat](https://raw.githubusercontent.com/CPSG-26/qalbu/master/screenshots/jadwal_sholat.gif) | ![arah kiblat](https://raw.githubusercontent.com/CPSG-26/qalbu/master/screenshots/arah_kiblat.gif) | ![catatan ibadah](https://raw.githubusercontent.com/CPSG-26/qalbu/master/screenshots/catatan_ibadah.gif) |
+
+_For more details, please watching video demo [here](https://www.youtube.com/watch?v=VBX5LlJ3jO0)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
